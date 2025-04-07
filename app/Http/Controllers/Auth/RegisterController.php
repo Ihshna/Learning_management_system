@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+
 class RegisterController extends Controller
 {
     public function showRegister()
@@ -20,7 +21,7 @@ class RegisterController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'role' => 'required|in:student,admin,super_admin',
+            'role' => 'required|in:student,admin,superadmin',
         ]);
 
         User::create([

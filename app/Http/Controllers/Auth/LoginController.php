@@ -20,9 +20,9 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $role = Auth::user()->role;
 
-            if ($role === 'super_admin') {
-                return redirect('/super-admin/dashboard');
-            } elseif ($role === 'admin') {
+            if (Auth::user()->role === 'superadmin') {
+                return redirect('/superadmin/dashboard');
+            } elseif (Auth::user()->role === 'admin') {
                 return redirect('/admin/dashboard');
             } else {
                 return redirect('/student/dashboard');
@@ -38,3 +38,5 @@ class LoginController extends Controller
         return redirect('/login');
     }
 }
+
+
