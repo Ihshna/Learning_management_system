@@ -28,8 +28,11 @@ class LoginController extends Controller
                 return redirect('/student/dashboard');
             }
         }
+        else{
+            return back()->with('error','Invalid username or password');
 
-        return back()->withErrors(['Invalid credentials']);
+        }
+ 
     }
 
     public function logout()
