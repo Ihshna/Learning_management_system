@@ -3,12 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Optional: Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
     <style>
         body { background-color: #f8f9fa; }
-        .sidebar { min-height: 100vh; background-color: #2c3e50; color: white; }
-        .sidebar a { color: white; display: block; padding: 10px; text-decoration: none; }
-        .sidebar a:hover { background-color: #1abc9c; }
+        .sidebar {
+            min-height: 100vh;
+            background-color: #2c3e50;
+            color: white;
+        }
+        .sidebar a {
+            color: white;
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+        }
+        .accordion-button::after {
+    filter: invert(1); /* Makes arrow icon white */
+}
+
+        .sidebar a:hover {
+            background-color: #1abc9c;
+        }
     </style>
 </head>
 <body>
@@ -34,6 +55,8 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('js/app.js') }}"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
