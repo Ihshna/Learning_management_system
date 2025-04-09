@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminDashboardController;
 
 //Route::get('/', function () {
     //return view('welcome');
@@ -27,3 +28,5 @@ Route::get('student/dashboard', [StudentController::class, 'index'])->name('stud
 
 // Logout
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('/admin/dashboard', [AdminDashboardController::class, 'index']);
