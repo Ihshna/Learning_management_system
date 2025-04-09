@@ -1,1 +1,6 @@
-<h1>Hello</h1>
+@extends('layouts.dashboard')
+
+@section('content')
+    <h2>Welcome Admin</h2>
+    <p>Here’s your dashboard overview.</p>
+@endsection

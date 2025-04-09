@@ -1,0 +1,9 @@
+<div class="sidebar">
+    <a href="#">Dashboard</a>
+    <a href="#">Manage Admins</a>
+    <div class="sub-item">Add Admin</div>
+    <div class="sub-item">Edit Admin</div>
+    <div class="sub-item">Remove Admin</div>
+    <a href="#">Course approval</a>
+      <div class="sub-item">Approved courses</div>
+    <div class="sub-item">Rejected courses</div>
