@@ -32,7 +32,7 @@ class LoginController extends Controller
             return back()->with('error','Invalid username or password');
         }
 
-        //return back()->withErrors(['Invalid credentials']);
+        
     }
 
     public function logout()

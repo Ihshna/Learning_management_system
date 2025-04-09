@@ -111,11 +111,13 @@
         </div>
         <div class="right">
             <h2>Login to Your Account</h2>
+
             @if(session('error'))
         <div style="color: red; font-weight: bold; margin-bottom: 10px; text-align: center;">
             {{ session('error') }}
         </div>
-    @endif
+           @endif
+           
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <input type="email" name="email" placeholder="Email" required>
