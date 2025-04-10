@@ -40,20 +40,25 @@
     <canvas id="studentChart" height="100"></canvas>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <!-- Chart.js Script -->
 <script>
     const ctx = document.getElementById('studentChart').getContext('2d');
+
     const studentChart = new Chart(ctx, {
-        type: 'line',
+        type: 'line', 
         data: {
             labels: @json($months),
             datasets: [{
-                label: 'Students',
+                label: 'Student Registrations',
                 data: @json($studentCounts),
-                backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                borderColor: 'rgba(54, 162, 235, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
                 fill: true,
-                tension: 0.3
+                tension: 0.3,
+                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                pointRadius: 4,
+                borderWidth: 2
             }]
         },
         options: {
@@ -62,8 +67,17 @@
                 y: {
                     beginAtZero: true,
                     ticks: {
-                        stepSize: 1
+                        precision: 0
                     }
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'top'
+                },
+                title: {
+                    display: true,
+                    text: 'Monthly Student Registrations'
                 }
             }
         }
