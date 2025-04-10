@@ -7,6 +7,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminStudentController;
 
 //Route::get('/', function () {
     //return view('welcome');
@@ -30,3 +31,7 @@ Route::get('student/dashboard', [StudentController::class, 'index'])->name('stud
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/admin/dashboard', [AdminDashboardController::class, 'index']);
+
+//Add students
+Route::get('/admin/students/add', [AdminStudentController::class, 'create'])->name('admin.students.add');
+Route::post('/admin/students/store', [AdminStudentController::class, 'store'])->name('admin.students.store');
