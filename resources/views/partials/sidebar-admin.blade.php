@@ -13,7 +13,7 @@
         <div id="studentsMenu" class="accordion-collapse collapse" data-bs-parent="#adminSidebar">
             <div class="accordion-body p-0">
                 <a href="{{ route('admin.students.add') }}" class="d-block ps-4">Add Student</a>
-                <a href="{{ url('/admin/manage-students') }}" class="d-block ps-4">Manage Students</a>
+                <a href="{{ route('admin.students.manage') }}" class="d-block ps-4">Manage Students</a>
             </div>
         </div>
     </div>

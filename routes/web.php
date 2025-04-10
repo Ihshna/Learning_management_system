@@ -35,3 +35,9 @@ Route::get('/admin/dashboard', [AdminDashboardController::class, 'index']);
 //Add students
 Route::get('/admin/students/add', [AdminStudentController::class, 'create'])->name('admin.students.add');
 Route::post('/admin/students/store', [AdminStudentController::class, 'store'])->name('admin.students.store');
+
+//manage students
+Route::get('/admin/students/manage', [AdminStudentController::class, 'index'])->name('admin.students.manage');
+Route::get('/admin/students/edit/{id}', [AdminStudentController::class, 'edit'])->name('admin.students.edit');
+Route::post('/admin/students/update/{id}', [AdminStudentController::class, 'update'])->name('admin.students.update');
+Route::get('/admin/students/delete/{id}', [AdminStudentController::class, 'delete'])->name('admin.students.delete');

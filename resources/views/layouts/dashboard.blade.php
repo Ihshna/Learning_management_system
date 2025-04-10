@@ -37,7 +37,10 @@
     <div class="row">
         <!-- Sidebar -->
         <div class="col-md-3 sidebar">
-            <h3 class="text-center py-3">Dashboard</h3>
+            <div class="sidebar-logo p-4">
+                <img src="{{asset('images/logo.jpeg') }}" class="rounded-circle d-block mx-auto" alt="Logo"
+                 style="width:100px; height:100px; object-fit: cover;">
+</div>
             @php $role = Auth::user()->role; @endphp
 
             @if($role == 'superadmin')
