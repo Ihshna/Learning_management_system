@@ -26,6 +26,11 @@
         .sidebar a:hover {
             background-color: #1abc9c;
         }
+
+        .accordion-button::after {
+            filter: invert(1); /* Makes arrow icon white */
+        }
+
     </style>
 </head>
 <body>
