@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Student Dashboard</title>
-</head>
-<body>
-    <h1>Hello Student, {{ Auth::user()->name }}</h1>
-</body>
-</html>
+@extends('layouts.dashboard')
+
+@section('content')
+    <h2>Welcome Student</h2>
+    <p>Here’s your dashboard overview.</p>
+@endsection
+

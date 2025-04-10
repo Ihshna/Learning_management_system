@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Super Admin Dashboard</title>
-</head>
-<body>
-    <h1>Hello Super Admin, {{ Auth::user()->name }}</h1>
-</body>
-</html>
+@extends('layouts.dashboard')
+
+@section('content')
+    <h2>Welcome Super admin</h2>
+    <p>Here’s your dashboard overview.</p>
+@endsection
+

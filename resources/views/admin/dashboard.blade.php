@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin Dashboard</title>
-</head>
-<body>
-    <h1>Hello Admin, {{ Auth::user()->name }}</h1>
-</body>
-</html>
+@extends('layouts.dashboard')
+
+@section('content')
+    <h2>Welcome Admin</h2>
+    <p>Here’s your dashboard overview.</p>
+@endsection
+
+
+
+
