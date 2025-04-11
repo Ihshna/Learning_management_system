@@ -37,7 +37,7 @@
     <div class="row">
         <!-- Sidebar -->
         <div class="col-md-3 sidebar">
-            <h3 class="text-center py-3">Dashboard</h3>
+        <img src="{{ asset('images/logo.jpeg') }}" alt="Logo" class="rounded-circle d-block mx-auto" style="width: 100px; height: 100px; object-fit: cover;">
             @php $role = Auth::user()->role; @endphp
 
             @if($role == 'superadmin')
@@ -55,6 +55,11 @@
         </div>
     </div>
 </div>
+
+@if(Auth::user()->role == 'superadmin')
+    @include('partials.sidebar-superadmin')
+@endif
+
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
