@@ -8,7 +8,7 @@ use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminStudentController;
-
+use App\Http\Controllers\AdminCourseController;
 //Route::get('/', function () {
     //return view('welcome');
 //});
@@ -41,3 +41,14 @@ Route::get('/admin/students/manage', [AdminStudentController::class, 'index'])->
 Route::get('/admin/students/edit/{id}', [AdminStudentController::class, 'edit'])->name('admin.students.edit');
 Route::post('/admin/students/update/{id}', [AdminStudentController::class, 'update'])->name('admin.students.update');
 Route::get('/admin/students/delete/{id}', [AdminStudentController::class, 'delete'])->name('admin.students.delete');
+
+//Manage courses
+Route::prefix('admin')->group(function () {
+    Route::get('/courses', [AdminCourseController::class, 'index'])->name('admin.courses.index');
+    Route::get('/courses/create', [AdminCourseController::class, 'create'])->name('admin.courses.create');
+    Route::post('/courses/store', [AdminCourseController::class, 'store'])->name('admin.courses.store');
+    Route::get('courses/manage',[AdminCourseController::class, 'manage'])->name('admin.courses.manage');
+    Route::get('/courses/edit/{id}', [AdminCourseController::class, 'edit'])->name('admin.courses.edit');
+Route::put('/courses/update/{id}', [AdminCourseController::class, 'update'])->name('admin.courses.update');
+Route::delete('/courses/delete/{id}', [AdminCourseController::class, 'delete'])->name('admin.courses.delete');
+});

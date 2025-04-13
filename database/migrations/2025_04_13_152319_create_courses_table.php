@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->enum('status',['pending','approved','rejected'])->default('pending');
+            $table->string('title');
+            $table->string('code')->unique();
+            $table->text('description');
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }
