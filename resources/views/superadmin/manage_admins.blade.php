@@ -1,38 +1,44 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('content')
 <div class="container mt-4">
-    <h3 class="text-white mb-4">Manage Admins</h3>
+    <h3 class="mb-4">Manage Admins</h3>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <table class="table table-bordered table-dark table-striped">
-        <thead>
+    <table class="table table-bordered table-striped bg-white">
+        <thead class="table-dark">
             <tr>
+                <th>#</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Created</th>
+                <th>Created At</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($admins as $admin)
+            @forelse($admins as $index => $admin)
                 <tr>
+                    <td>{{ $index + 1 }}</td>
                     <td>{{ $admin->name }}</td>
                     <td>{{ $admin->email }}</td>
-                    <td>{{ $admin->created_at->diffForHumans() }}</td>
+                    <td>{{ $admin->created_at->format('Y-m-d') }}</td>
                     <td>
-                        <a href="{{ url('/superadmin/admins/'.$admin->id.'/edit') }}" class="btn btn-sm btn-primary">Edit</a>
-                        <form method="POST" action="{{ url('/superadmin/admins/'.$admin->id) }}" style="display:inline;">
+                        <!-- Delete Button -->
+                        <form action="{{ route('admin.delete', $admin->id) }}" method="POST" style="display:inline-block;">
                             @csrf
-                            @method('DELETE')
-                            <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this admin?')">Delete</button>
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
                         </form>
+                        <!-- Optional: Add Edit button -->
                     </td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="5" class="text-center">No admins found.</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </div>
