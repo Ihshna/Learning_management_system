@@ -70,7 +70,7 @@ public function rejectedCourses()
         return redirect()->route('superadmin.manageAdmins')->with('success', 'Admin added successfully!');
     }
 
-    /*
+    
     public function dashboard()
 {
     $adminCount = User::where('role', 'admin')->count();
@@ -86,6 +86,6 @@ public function rejectedCourses()
         'rejectedCourses'
     ));
 }
-*/
+
 
 }

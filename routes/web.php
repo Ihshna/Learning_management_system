@@ -26,7 +26,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('superadmin/dashboard', [SuperAdminController::class, 'index'])->name('superadmin.dashboard');
 Route::get('admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 Route::get('student/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
-
+/*
 //create super admin dashboard
 Route::get('/superadmin/dashboard', function () {
     return view('superadmin.dashboard', [
@@ -35,7 +35,8 @@ Route::get('/superadmin/dashboard', function () {
         'approvedCourses' => 8,
         'rejectedCourses' => 1,
     ]);
-});
+});*/
+Route::get('/superadmin/dashboard', [SuperAdminController::class, 'dashboard'])->name('superadmin.dashboard');
 
 //Route Setup
 Route::get('/superadmin/admins/create', [AdminManagementController::class, 'create']);
@@ -70,6 +71,10 @@ Route::post('/superadmin/delete_admin/{id}', [SuperAdminController::class, 'dele
 Route::get('/superadmin/pending-requests', [SuperAdminController::class, 'pendingRequests'])->name('superadmin.pendingRequests');
 Route::get('/superadmin/approved-courses', [SuperAdminController::class, 'approvedCourses'])->name('superadmin.approvedCourses');
 Route::get('/superadmin/rejected-courses', [SuperAdminController::class, 'rejectedCourses'])->name('superadmin.rejectedCourses');
+
+
+
+Route::post('/superadmin/admins/add', [SuperAdminController::class, 'storeAdmin'])->name('superadmin.storeAdmin');
 
 // Logout
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');

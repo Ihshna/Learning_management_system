@@ -8,7 +8,8 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <form method="POST" action="{{ url('/superadmin/admins/add') }}">
+    <form method="POST" action="{{ route('superadmin.storeAdmin') }}">
+
         @csrf
 
         <div class="mb-3">
