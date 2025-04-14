@@ -10,12 +10,13 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminStudentController;
 use App\Http\Controllers\AdminCourseController;
 use App\Http\Controllers\AssignmentController;
+use App\Http\Controllers\LandingPageController;
 //Route::get('/', function () {
     //return view('welcome');
 //});
+Route::get('/', [LandingPageController::class, 'index'])->name('landing');
 
-
-Route::get('/', fn() => redirect('/login'));
+//Route::get('/', fn() => redirect('/login'));
 
 Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
