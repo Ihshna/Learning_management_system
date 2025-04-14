@@ -1,17 +1,23 @@
 <?php
 
 namespace App\Models;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Assignment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'course_id', 'due_date'];
+    protected $fillable=[
+        'title',
+        'description',
+        'due_date',
+        'course_id',
+        'file_path',
+    ];
 
-    public function course()
-{
-    return $this->belongsTo(Course::class);
-}
+    public function course(){
+        return $this->belongsTo(Course::class);
+    }
 }
