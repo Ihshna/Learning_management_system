@@ -8,6 +8,8 @@ use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminManagementController;
 use App\Http\Controllers\CourseRequestController;
+use App\Http\Controllers\SuperAdminCourseController;
+
 
 //Route::get('/', function () {
     //return view('welcome');
@@ -72,6 +74,14 @@ Route::get('/superadmin/admins/edit/{id}', [SuperAdminController::class, 'editAd
 
 // Handle the update
 Route::post('/superadmin/admins/update/{id}', [SuperAdminController::class, 'updateAdmin'])->name('superadmin.updateAdmin');
+
+
+Route::prefix('superadmin')->group(function () {
+    Route::get('courses/pending', [SuperAdminCourseController::class, 'pending'])->name('superadmin.courses.pending');
+    Route::post('courses/{id}/approve', [SuperAdminCourseController::class, 'approve'])->name('superadmin.courses.approve');
+    Route::post('courses/{id}/reject', [SuperAdminCourseController::class, 'reject'])->name('superadmin.courses.reject');
+});
+
 
 
 // Logout

@@ -11,13 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('courses', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('description')->nullable();
-            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');        
-            $table->timestamps();
-        });
+        {
+    Schema::create('courses', function (Blueprint $table) {
+        $table->id();
+        $table->string('title');
+        $table->text('description')->nullable();
+        $table->unsignedBigInteger('created_by')->nullable();
+        $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+        $table->timestamps();
+
+        $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
+    });
+}
+
     }
 
     /**
