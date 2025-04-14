@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mt-4">
-    <h3 class="mb-4">Manage Admins</h3>
+    <h3 class="mb-4 text-white">Manage Admins</h3>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -25,13 +25,16 @@
                     <td>{{ $admin->name }}</td>
                     <td>{{ $admin->email }}</td>
                     <td>{{ $admin->created_at->format('Y-m-d') }}</td>
-                    <td>
+                    <td class="d-flex gap-1">
+                        <!-- Edit Button -->
+                        <a href="{{ url('/superadmin/admins/edit/' . $admin->id) }}" class="btn btn-sm btn-warning">Edit</a>
+
                         <!-- Delete Button -->
-                        <form action="{{ route('admin.delete', $admin->id) }}" method="POST" style="display:inline-block;">
+                        <form action="{{ route('admin.delete', $admin->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this admin?');">
                             @csrf
-                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                         </form>
-                        <!-- Optional: Add Edit button -->
                     </td>
                 </tr>
             @empty

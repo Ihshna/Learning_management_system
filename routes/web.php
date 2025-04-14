@@ -67,6 +67,13 @@ Route::get('/superadmin/rejected-courses', [SuperAdminController::class, 'reject
 
 Route::post('/superadmin/admins/add', [SuperAdminController::class, 'storeAdmin'])->name('superadmin.storeAdmin');
 
+// Show the edit form
+Route::get('/superadmin/admins/edit/{id}', [SuperAdminController::class, 'editAdmin'])->name('superadmin.editAdmin');
+
+// Handle the update
+Route::post('/superadmin/admins/update/{id}', [SuperAdminController::class, 'updateAdmin'])->name('superadmin.updateAdmin');
+
+
 // Logout
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 

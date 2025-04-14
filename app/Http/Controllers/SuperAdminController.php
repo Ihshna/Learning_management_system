@@ -40,6 +40,31 @@ public function rejectedCourses()
         return redirect()->back()->with('success', 'Admin deleted successfully.');
     }
 
+    // Show the edit form
+public function editAdmin($id)
+{
+    $admin = User::findOrFail($id);
+    return view('superadmin.edit_admin', compact('admin'));
+}
+
+// Handle form submission to update
+public function updateAdmin(Request $request, $id)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email,' . $id,
+    ]);
+
+    $admin = User::findOrFail($id);
+    $admin->update([
+        'name' => $request->name,
+        'email' => $request->email,
+    ]);
+
+    return redirect()->route('superadmin.manageAdmins')->with('success', 'Admin updated successfully!');
+}
+
+
     public function index()
     {
         return view('superadmin.dashboard');
