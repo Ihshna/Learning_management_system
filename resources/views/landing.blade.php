@@ -58,20 +58,35 @@
 <body>
 
   <!-- Hero Section -->
-  <div class="hero-section">
-    <div class="hero-overlay"></div>
+<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
 
-    <div class="auth-buttons">
-      <a href="{{ route('login') }}" class="btn btn-outline-light me-2">Login</a>
-      <a href="{{ route('register') }}" class="btn btn-light">Register</a>
-    </div>
+        <div class="carousel-item active">
+            <img src="{{ asset('images/head.jpg') }}" class="d-block w-100" style="height: 100vh; object-fit: cover;">
+            <div class="carousel-caption d-flex flex-column justify-content-center align-items-end h-100 pe-5">
+                <h1 class="display-3 text-white fw-bold">Welcome to LearnNest</h1>
+                <p class="lead text-white">Learn. Grow. Achieve.</p>
+                <div>
+                    <a href="{{ route('login') }}" class="btn btn-primary me-2">Login</a>
+                    <a href="{{ route('register') }}" class="btn btn-outline-light">Register</a>
+                </div>
+            </div>
+        </div>
 
-    <div class="hero-content">
-      <h1 class="display-3 fw-bold">Welcome to LearnNest</h1>
-      <p class="lead">Your ultimate e-learning platform. Explore a variety of courses and start learning now!</p>
-      <a href="#courses" class="btn btn-primary btn-lg mt-3">Explore Courses</a>
+        <div class="carousel-item">
+            <img src="{{ asset('images/about-learnnest.jpg') }}" class="d-block w-100" style="height: 100vh; object-fit: cover;">
+            <div class="carousel-caption d-flex flex-column justify-content-center align-items-end h-100 pe-5">
+                <h1 class="display-3 text-white fw-bold">Discover Quality Courses</h1>
+                <p class="lead text-white">Empower your future with the best content</p>
+                <div>
+                    <a href="{{ route('login') }}" class="btn btn-primary me-2">Login</a>
+                    <a href="{{ route('register') }}" class="btn btn-outline-light">Register</a>
+                </div>
+            </div>
+        </div>
+
     </div>
-  </div>
+</div>
 
   <!-- About LearnNest Section -->
 <section class="py-5 bg-light">
@@ -115,6 +130,33 @@
       </div>
     </div>
   </section>
+
+  <section class="py-5 bg-light" id="feedback">
+    <div class="container">
+        <h2 class="mb-4">We Value Your Feedback</h2>
+
+        @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+
+        <form method="POST" action="{{ route('feedback.store') }}">
+            @csrf
+            <div class="mb-3">
+                <label>Name</label>
+                <input type="text" name="name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label>Your Feedback</label>
+                <textarea name="message" rows="4" class="form-control" required></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Submit Feedback</button>
+        </form>
+    </div>
+</section>
 
   <footer class="bg-dark text-white text-center py-4">
     <p>&copy; {{ date('Y') }} LearnNest. All rights reserved.</p>

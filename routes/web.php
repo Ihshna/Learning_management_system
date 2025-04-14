@@ -11,6 +11,10 @@ use App\Http\Controllers\AdminStudentController;
 use App\Http\Controllers\AdminCourseController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\FeedbackController;
+
+
+
 //Route::get('/', function () {
     //return view('welcome');
 //});
@@ -62,3 +66,6 @@ Route::get('/admin/assignments/manage', [AssignmentController::class, 'index'])-
 Route::get('/admin/assignments/edit/{id}', [AssignmentController::class, 'edit'])->name('admin.assignments.edit');
 Route::post('/admin/assignments/update/{id}', [AssignmentController::class, 'update'])->name('admin.assignments.update');
 Route::get('/admin/assignments/delete/{id}', [AssignmentController::class, 'delete'])->name('admin.assignments.delete');
+
+//Feedback
+Route::post('/feedback',[FeedbackController::class,'store'])->name('feedback.store');
