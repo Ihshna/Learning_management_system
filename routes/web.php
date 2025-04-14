@@ -26,16 +26,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('superadmin/dashboard', [SuperAdminController::class, 'index'])->name('superadmin.dashboard');
 Route::get('admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 Route::get('student/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
-/*
-//create super admin dashboard
-Route::get('/superadmin/dashboard', function () {
-    return view('superadmin.dashboard', [
-        'adminCount' => 4,
-        'pendingCourses' => 3,
-        'approvedCourses' => 8,
-        'rejectedCourses' => 1,
-    ]);
-});*/
+
 Route::get('/superadmin/dashboard', [SuperAdminController::class, 'dashboard'])->name('superadmin.dashboard');
 
 //Route Setup
