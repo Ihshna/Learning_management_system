@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminStudentController;
 use App\Http\Controllers\AdminCourseController;
+use App\Http\Controllers\AssignmentController;
 //Route::get('/', function () {
     //return view('welcome');
 //});
@@ -52,3 +53,11 @@ Route::prefix('admin')->group(function () {
 Route::put('/courses/update/{id}', [AdminCourseController::class, 'update'])->name('admin.courses.update');
 Route::delete('/courses/delete/{id}', [AdminCourseController::class, 'delete'])->name('admin.courses.delete');
 });
+
+// Admin - Assignments
+Route::get('/admin/assignments/create', [AssignmentController::class, 'create'])->name('admin.assignments.create');
+Route::post('/admin/assignments/store', [AssignmentController::class, 'store'])->name('admin.assignments.store');
+Route::get('/admin/assignments/manage', [AssignmentController::class, 'index'])->name('admin.assignments.manage');
+Route::get('/admin/assignments/edit/{id}', [AssignmentController::class, 'edit'])->name('admin.assignments.edit');
+Route::post('/admin/assignments/update/{id}', [AssignmentController::class, 'update'])->name('admin.assignments.update');
+Route::get('/admin/assignments/delete/{id}', [AssignmentController::class, 'delete'])->name('admin.assignments.delete');

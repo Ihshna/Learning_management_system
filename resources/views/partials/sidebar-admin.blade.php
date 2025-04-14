@@ -58,8 +58,8 @@
         </h2>
         <div id="assignmentsMenu" class="accordion-collapse collapse" data-bs-parent="#adminSidebar">
             <div class="accordion-body p-0">
-                <a href="{{ url('/admin/create-assignment') }}" class="d-block ps-4">Create Assignment</a>
-                <a href="{{ url('/admin/manage-assignments') }}" class="d-block ps-4">Manage Assignments</a>
+                <a href="{{ route('admin.assignments.create') }}" class="d-block ps-4">Create Assignment</a>
+                <a href="{{ route('admin.assignments.manage') }}" class="d-block ps-4">Manage Assignments</a>
             </div>
         </div>
     </div>

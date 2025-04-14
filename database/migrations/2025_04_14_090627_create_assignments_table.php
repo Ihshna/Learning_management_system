@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->date('due_date');
+            $table->string('status')->default('Pending');
             $table->unsignedBigInteger('course_id');
             $table->string('file_path')->nullable();
             $table->timestamps();
