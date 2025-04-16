@@ -30,6 +30,7 @@
         .accordion-button::after {
             filter: invert(1); /* Makes arrow icon white */
         }
+        
 
     </style>
 </head>
@@ -38,7 +39,8 @@
     <div class="row">
         <!-- Sidebar -->
         <div class="col-md-3 sidebar">
-            <h3 class="text-center py-3">Dashboard</h3>
+        <img src="{{ asset('/logo.png') }}" alt="Logo" class="rounded-circle d-block mx-auto" style="width: 100px; height: 100px; object-fit: cover;">
+           
             @php $role = Auth::user()->role; @endphp
 
             @if($role == 'superadmin')

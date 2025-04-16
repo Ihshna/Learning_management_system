@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StudentDashboardController;
+
 
 //Route::get('/', function () {
     //return view('welcome');
@@ -27,3 +29,18 @@ Route::get('student/dashboard', [StudentController::class, 'index'])->name('stud
 
 // Logout
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::prefix('student')->middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [StudentDashboardController::class, 'index'])->name('student.dashboard');
+    Route::get('/courses', [StudentDashboardController::class, 'courses'])->name('student.courses');
+    Route::get('/assignments', [StudentDashboardController::class, 'assignments'])->name('student.assignments');
+    Route::get('/notifications', [StudentDashboardController::class, 'notifications'])->name('student.notifications');
+    Route::get('/profile', [StudentDashboardController::class, 'profile'])->name('student.profile');
+});
+
+Route::get('/student/assignments', [StudentDashboardController::class, 'assignments'])->name('student.assignments');
+
+Route::get('/student/assignments/submit/{id}', [StudentDashboardController::class, 'submitAssignment'])->name('student.assignment.submit');
+Route::post('/student/assignments/submit/{id}', [StudentDashboardController::class, 'storeAssignment'])->name('student.assignment.store');
+
+Route::get('/student/submissions', [StudentDashboardController::class, 'viewSubmissions'])->name('student.submissions');
