@@ -37,6 +37,7 @@
         <a href="{{ route('student.dashboard') }}">Dashboard</a>
         <a href="{{ route('student.courses') }}">My Courses</a>
         <a href="{{ route('student.assignments') }}">My Assignments</a>
+        <a href="{{ route('student.submissions') }}">Submitted Assignments</a>
         <a href="{{ route('student.notifications') }}">Notifications</a>
         <a href="{{ route('student.profile') }}">Profile</a>
     </div>

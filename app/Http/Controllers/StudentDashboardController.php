@@ -57,7 +57,16 @@ class StudentDashboardController extends Controller
 
         return redirect()->route('student.assignments')->with('success', 'Assignment submitted successfully!');
     }
-    
+    public function viewSubmissions()
+   { 
+    $submissions = AssignmentSubmission::with('assignment')
+                    ->where('student_id', auth()->id())
+                    ->latest()
+                    ->get();
+
+    return view('student.view-submissions', compact('submissions'));
+   }
+
     
      public function notifications() {
         return view('student.notifications');
