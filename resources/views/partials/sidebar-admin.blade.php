@@ -63,5 +63,16 @@
             </div>
         </div>
     </div>
-
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<!-- Bottom Logout Button -->
+<div class="p-3">
+        <form action="{{ route('logout') }}" method="POST"
+        onsubmit="return confirm('Are you sure you want to logout?');">
+            @csrf
+            <button type="submit" class="btn text-black w-100 text-start" style="background-color:white; color:black;">
+                <i class="fas fa-sign-out-alt me-2"></i> Logout
+            </button>
+        </form>
+    </div>
+    
 </div>

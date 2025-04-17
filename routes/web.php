@@ -13,8 +13,8 @@ use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\AddAdminController;
-
-
+use App\Http\Controllers\SuperAdminCourseController;
+use Illuminate\Support\Facades\Auth;
 //Route::get('/', function () {
     //return view('welcome');
 //});
@@ -84,3 +84,16 @@ Route::post('/superadmin/admins/update/{id}', [AddAdminController::class, 'updat
 
 // Delete Admin
 Route::delete('/superadmin/admins/delete/{id}', [AddAdminController::class, 'destroy'])->name('superadmin.admins.destroy');
+
+//Approval course
+Route::get('/superadmin/courses/pending', [SuperAdminCourseController::class, 'pending'])->name('superadmin.courses.pending');
+Route::post('/superadmin/courses/approve/{id}', [SuperAdminCourseController::class, 'approve'])->name('superadmin.courses.approve');
+Route::post('/superadmin/courses/reject/{id}', [SuperAdminCourseController::class, 'reject'])->name('superadmin.courses.reject');
+
+//Approved Courses
+Route::get('/superadmin/courses/approved', [SuperAdminCourseController::class, 'approved'])->name('superadmin.courses.approved');
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/'); // Redirect to landing page
+})->name('logout');
