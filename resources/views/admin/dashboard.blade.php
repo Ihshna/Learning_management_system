@@ -4,6 +4,7 @@
 <div class="container mt-4">
     <h3 class="text-black mb-4">Admin Dashboard</h3>
 
+
     <!-- Total Cards -->
     <div class="row">
         <div class="col-md-3 mb-3">
@@ -83,5 +84,6 @@
         }
     });
 </script>
+
 @endsection
 
