@@ -69,3 +69,6 @@ Route::get('/admin/assignments/delete/{id}', [AssignmentController::class, 'dele
 
 //Feedback
 Route::post('/feedback',[FeedbackController::class,'store'])->name('feedback.store');
+
+//Super -admin
+Route::get('/superadmin/dashboard',[SuperAdminController::class,'dashboard'])->name('superadmin.dashboard');
