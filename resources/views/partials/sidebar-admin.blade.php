@@ -63,7 +63,7 @@
             </div>
         </div>
     </div>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
 <!-- Bottom Logout Button -->
 <div class="p-3">
         <form action="{{ route('logout') }}" method="POST"
