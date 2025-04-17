@@ -12,8 +12,8 @@
         </h2>
         <div id="adminsMenu" class="accordion-collapse collapse" data-bs-parent="#superadminSidebar">
             <div class="accordion-body p-0">
-                <a href="{{ url('/superadmin/add-admin') }}" class="d-block ps-4">Add Admin</a>
-                <a href="{{ url('/superadmin/manage-admins') }}" class="d-block ps-4">Manage Admins</a>
+                <a href="{{ route('superadmin.admins.create') }}" class="d-block ps-4">Add Admin</a>
+                <a href="{{ route('superadmin.admins.manage') }}" class="d-block ps-4">Manage Admins</a>
             </div>
         </div>
     </div>

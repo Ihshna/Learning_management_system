@@ -25,7 +25,11 @@ class SuperAdminController extends Controller
 
         return redirect()->route('login')->with('error', 'Unauthorized access');
     }
-        }
+
+    
+
+
+}
 
     
 

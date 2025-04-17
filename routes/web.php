@@ -12,7 +12,7 @@ use App\Http\Controllers\AdminCourseController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\FeedbackController;
-
+use App\Http\Controllers\AddAdminController;
 
 
 //Route::get('/', function () {
@@ -72,3 +72,15 @@ Route::post('/feedback',[FeedbackController::class,'store'])->name('feedback.sto
 
 //Super -admin
 Route::get('/superadmin/dashboard',[SuperAdminController::class,'dashboard'])->name('superadmin.dashboard');
+Route::get('/superadmin/admins/add', [AddAdminController::class, 'create'])->name('superadmin.admins.create');
+Route::post('/superadmin/admins/store', [AddAdminController::class, 'store'])->name('superadmin.admins.store');
+
+// Manage Admins
+Route::get('/superadmin/admins/manage', [AddAdminController::class, 'index'])->name('superadmin.admins.manage');
+
+// Edit Admin
+Route::get('/superadmin/admins/edit/{id}', [AddAdminController::class, 'edit'])->name('superadmin.admins.edit');
+Route::post('/superadmin/admins/update/{id}', [AddAdminController::class, 'update'])->name('superadmin.admins.update');
+
+// Delete Admin
+Route::delete('/superadmin/admins/delete/{id}', [AddAdminController::class, 'destroy'])->name('superadmin.admins.destroy');
