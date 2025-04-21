@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->timestamp('due_date')->nullable();
+            $table->foreignId('course_id')->constrained()->onDelete('cascade'); // Foreign key to link assignments to courses
             $table->timestamps();
         });
     }

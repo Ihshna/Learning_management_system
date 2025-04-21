@@ -14,11 +14,14 @@ class Course extends Model
     // Relationship with User
     public function students()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'course_student', 'course_id', 'student_id');
+
     }
 
     public function assignments()
     {
         return $this->hasMany(Assignment::class);
     }
+
+    
 }
