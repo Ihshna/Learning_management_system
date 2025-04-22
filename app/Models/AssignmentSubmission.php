@@ -16,6 +16,11 @@ class AssignmentSubmission extends Model
         'notes',
         'submitted_at',
     ];
+    // App\Models\AssignmentSubmission.php
+protected $casts = [
+    'submitted_at' => 'datetime',
+];
+
 
     public function assignment()
     {

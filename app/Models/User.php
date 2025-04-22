@@ -47,7 +47,7 @@ class User extends Authenticatable
         ];
     }
 
-    
+
     /**
      * The courses that the user is enrolled in.
      */
@@ -55,5 +55,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Course::class, 'course_user'); // Adjust pivot table if needed
     }
+
+    public function assignments()
+{
+    return $this->belongsToMany(Assignment::class)->withTimestamps();
+}
+
     
 }

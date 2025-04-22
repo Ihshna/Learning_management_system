@@ -22,11 +22,13 @@ class StudentDashboardController extends Controller
     // My Courses
     public function myCourses()
     {
+    
         $student = Auth::user(); // Get the authenticated user (student)
         $courses = $student->courses ?: collect(); // Get courses the student is enrolled in
 
-        return view('student.my_courses', compact('courses')); // Pass courses to the view
+    return view('student.my_courses', compact('courses')); // Pass courses to the view
     }
+
 
     // Available Courses (to join)
     public function viewAvailableCourses()
@@ -47,65 +49,70 @@ class StudentDashboardController extends Controller
         $user = Auth::user();
         $course = Course::findOrFail($id);
 
-        // Prevent duplicate enrollments
-        if (!$user->courses->contains($id)) {
-            $user->courses()->attach($id);
-        }
+    // Prevent duplicate enrollments
+    if (!$user->courses->contains($id)) {
+        $user->courses()->attach($id);
+    }
 
-        return redirect()->route('student.mycourses')->with('success', 'You have successfully joined the course!');
+    return redirect()->route('student.mycourses')->with('success', 'You have successfully joined the course!');
     }
 
     public function leaveCourse($id)
-    {
-        $user = Auth::user();
-        $course = Course::findOrFail($id);
+{
+    $user = Auth::user();
+    $course = Course::findOrFail($id);
 
-        // Detach course from the pivot table
-        $user->courses()->detach($course->id);
+    // Detach course from the pivot table
+    $user->courses()->detach($course->id);
 
-        return redirect()->route('student.mycourses')->with('success', 'You have successfully left the course!');
-    }
-
+    return redirect()->route('student.mycourses')->with('success', 'You have successfully left the course!');
+}
+ 
+    
     // Assignments
     public function assignments()
     {
         $student = auth()->user();
-        $assignments = $student->courses()->with('assignments')->get()->flatMap(function ($course) {
-            return $course->assignments;
-        });
-
+        $assignments = [];
+    
+        foreach ($student->courses as $course) {
+            foreach ($course->assignments as $assignment) {
+                $assignments[] = $assignment;
+            }
+        }
         return view('student.assignments', compact('assignments'));
     }
 
     // Submit Assignment
     public function submitAssignment($id)
-    {
-        $assignment = Assignment::findOrFail($id);
-        return view('student.submit-assignment', compact('assignment'));
-    }
+{
+    $assignment = Assignment::findOrFail($id);
+    return view('student.submit-assignment', compact('assignment'));
+}
 
-    public function storeAssignment(Request $request, $id)
-    {
-        $request->validate([
-            'submission_file' => 'required|mimes:pdf,docx,zip|max:20480',
-            'notes' => 'nullable|string',
-        ]);
+public function storeAssignment(Request $request, $id)
+{
+    $request->validate([
+        'submission_file' => 'required|mimes:pdf,docx,zip|max:20480',
+        'notes' => 'nullable|string',
+    ]);
 
-        // Store the uploaded file
-        $filePath = $request->file('submission_file')->store('submissions', 'public');
+    // Store the uploaded file
+    $filePath = $request->file('submission_file')->store('submissions', 'public');
 
-        // Create a new assignment submission record
-        AssignmentSubmission::create([
-            'assignment_id' => $id,
-            'student_id' => auth()->id(),
-            'submission_file' => $filePath,
-            'notes' => $request->notes,
-            'submitted_at' => now(),
-        ]);
+    // Create a new assignment submission record
+    AssignmentSubmission::create([
+        'assignment_id' => $id,
+        'student_id' => auth()->id(),
+        'submission_file' => $filePath,
+        'notes' => $request->notes,
+        'submitted_at' => now(),
+    ]);
 
-        // Redirect to the submissions page
-        return redirect()->route('student.submissions')->with('success', 'Assignment submitted successfully!');
-    }
+    // Redirect to the submissions page
+    return redirect()->route('student.submissions')->with('success', 'Assignment submitted successfully!');
+}
+
 
     // View Submissions
     public function viewSubmissions()
