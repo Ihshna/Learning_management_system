@@ -46,9 +46,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    
+    /**
+     * The courses that the user is enrolled in.
+     */
     public function courses()
     {
-        return $this->belongsToMany(Course::class, 'course_student', 'student_id', 'course_id');
-
+        return $this->belongsToMany(Course::class, 'course_user'); // Adjust pivot table if needed
     }
+    
 }

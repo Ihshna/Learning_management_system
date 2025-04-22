@@ -21,10 +21,13 @@ class StudentDashboardController extends Controller
     // My Courses
     public function myCourses()
     {
-        $student = auth()->user();
-        $courses = $student->courses; // eager load courses associated with the student
-        return view('student.my_courses', compact('courses'));
+    
+        $student = Auth::user(); // Get the authenticated user (student)
+        $courses = $student->courses ?: collect(); // Get courses the student is enrolled in
+
+    return view('student.my_courses', compact('courses')); // Pass courses to the view
     }
+
 
     // Available Courses (to join)
     public function viewAvailableCourses()
@@ -45,13 +48,25 @@ class StudentDashboardController extends Controller
         $user = Auth::user();
         $course = Course::findOrFail($id);
 
-        // Prevent duplicate enrollments
-        if (!$user->courses->contains($id)) {
-            $user->courses()->attach($id);
-        }
-
-        return redirect()->back()->with('success', 'You have successfully joined the course!');
+    // Prevent duplicate enrollments
+    if (!$user->courses->contains($id)) {
+        $user->courses()->attach($id);
     }
+
+    return redirect()->route('student.mycourses')->with('success', 'You have successfully joined the course!');
+    }
+
+    public function leaveCourse($id)
+{
+    $user = Auth::user();
+    $course = Course::findOrFail($id);
+
+    // Detach course from the pivot table
+    $user->courses()->detach($course->id);
+
+    return redirect()->route('student.mycourses')->with('success', 'You have successfully left the course!');
+}
+ 
     
     // Assignments
     public function assignments()

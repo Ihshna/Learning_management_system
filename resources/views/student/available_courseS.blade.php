@@ -1,8 +1,10 @@
-@extends('student.layout') <!-- Your main layout -->
+<!-- resources/views/student/available_courses.blade.php -->
+
+@extends('student.layout')
 
 @section('content')
     <div class="container">
-        <h1 class="my-4">My Courses</h1>
+        <h1 class="my-4">Available Courses</h1>
 
         @if(session('success'))
             <div class="alert alert-success">
@@ -12,7 +14,7 @@
 
         @if($courses->isEmpty())
             <div class="alert alert-warning" role="alert">
-                You are not enrolled in any courses yet.
+                There are no available courses at the moment.
             </div>
         @else
             <div class="row">
@@ -26,15 +28,11 @@
                                 <p class="card-text">{{ Str::limit($course->description, 100) }}</p>
                                 <a href="{{ route('student.course.details', $course->id) }}" class="btn btn-primary mb-2">View Details</a>
 
-                                <!-- Leave Course Form -->
-                                <form action="{{ route('student.course.leave', $course->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to leave this course?');">
+                                <!-- Join Course Form -->
+                                <form action="{{ route('student.course.join', $course->id) }}" method="POST">
                                     @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Leave Course</button>
+                                    <button type="submit" class="btn btn-success btn-sm">Join Course</button>
                                 </form>
-                            </div>
-                            <div class="card-footer text-muted">
-                                Enrolled on: {{ $course->pivot->created_at ? $course->pivot->created_at->format('d M, Y') : 'N/A' }}
                             </div>
                         </div>
                     </div>

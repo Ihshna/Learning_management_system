@@ -13,10 +13,9 @@ class Course extends Model
 
     // Relationship with User
     public function students()
-    {
-        return $this->belongsToMany(User::class, 'course_student', 'course_id', 'student_id');
-
-    }
+{
+    return $this->belongsToMany(User::class, 'course_user'); // Same pivot table name as in the User model
+}
 
     public function assignments()
     {
