@@ -24,14 +24,20 @@
                             </div>
                             <div class="card-body">
                                 <p class="card-text">{{ Str::limit($course->description, 100) }}</p>
-                                <a href="{{ route('student.course.details', $course->id) }}" class="btn btn-primary mb-2">View Details</a>
 
-                                <!-- Leave Course Form -->
-                                <form action="{{ route('student.course.leave', $course->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to leave this course?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Leave Course</button>
-                                </form>
+                                <!-- Smaller Buttons side by side, equal width -->
+                                <div class="d-flex justify-content-center gap-2 w-75 mx-auto">
+                                    <a href="{{ route('student.course.details', $course->id) }}" class="btn btn-primary w-100">
+                                        View
+                                    </a>
+
+                                    <form action="{{ route('student.course.leave', $course->id) }}" method="POST"
+                                          onsubmit="return confirm('Are you sure you want to leave this course?');" class="w-100">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger w-100">Leave</button>
+                                    </form>
+                                </div>
                             </div>
                             <div class="card-footer text-muted">
                                 Enrolled on: {{ $course->pivot->created_at ? $course->pivot->created_at->format('d M, Y') : 'N/A' }}

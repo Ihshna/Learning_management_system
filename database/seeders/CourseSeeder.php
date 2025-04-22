@@ -27,5 +27,22 @@ class CourseSeeder extends Seeder
             'title' => 'Data Science',
             'description' => 'Understand data analysis and machine learning with Python.',
         ]);
+        Course::create([
+            'title' => 'Machine Learning',
+            'description' => 'Build predictive models and understand core ML algorithms.',
+        ]);
+    
+        // ✅ New Course 2
+        Course::create([
+            'title' => 'Cybersecurity Fundamentals',
+            'description' => 'Learn the principles of protecting networks and data.',
+        ]);
+    
+        // ✅ New Course 3
+        Course::create([
+            'title' => 'Mobile App Development',
+            'description' => 'Create Android and iOS applications using modern frameworks.',
+        ]);
     }
-}
+    }
+
