@@ -1,22 +1,24 @@
+
 @extends('student.layout')
 
 @section('content')
-    <h2>Submit Assignment: {{ $assignment->title }}</h2>
+<div class="container mt-5">
+    <h2 class="mb-4">Submit Assignment</h2>
 
     <form action="{{ route('student.assignment.store', $assignment->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
 
-        <div class="mb-3">
-            <label for="submission_file" class="form-label">Upload File</label>
-            <input type="file" name="submission_file" class="form-control" required>
+        <div class="form-group">
+            <label for="submission_file">Submission File</label>
+            <input type="file" name="submission_file" id="submission_file" class="form-control" required>
         </div>
 
-        <div class="mb-3">
-            <label for="notes" class="form-label">Additional Notes (optional)</label>
-            <textarea name="notes" class="form-control"></textarea>
+        <div class="form-group mt-3">
+            <label for="notes">Additional Notes (Optional)</label>
+            <textarea name="notes" id="notes" class="form-control" rows="4">{{ old('notes') }}</textarea>
         </div>
 
-        <button type="submit" class="btn btn-success">Submit Assignment</button>
+        <button type="submit" class="btn btn-success mt-3">Submit Assignment</button>
     </form>
+</div>
 @endsection
-

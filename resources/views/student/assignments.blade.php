@@ -1,4 +1,4 @@
-@extends('layouts.student')
+@extends('student.layout')
 
 @section('content')
 <div class="container mt-5">
@@ -23,6 +23,7 @@
                         <td>{{ $assignment->description }}</td>
                         <td>{{ $assignment->due_date }}</td>
                         <td>
+                            <!-- Submit Button -->
                             <a href="{{ route('student.assignment.submit', $assignment->id) }}" class="btn btn-primary btn-sm">Submit</a>
                         </td>
                     </tr>

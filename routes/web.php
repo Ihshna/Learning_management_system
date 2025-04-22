@@ -22,11 +22,10 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 // Dashboards for each role
 Route::get('/superadmin/dashboard', [SuperAdminController::class, 'index'])->name('superadmin.dashboard');
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-Route::get('/student/dashboard', [StudentDashboardController::class, 'index'])->name('student.dashboard');
 
 // Grouped Student Routes
 Route::prefix('student')->middleware(['auth'])->group(function () {
-    
+
     // Dashboard
     Route::get('/dashboard', [StudentDashboardController::class, 'index'])->name('student.dashboard');
 

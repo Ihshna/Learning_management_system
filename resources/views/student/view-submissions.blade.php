@@ -1,34 +1,36 @@
 @extends('student.layout')
 
 @section('content')
-    <h2>Your Submitted Assignments</h2>
+<div class="container mt-5">
+    <h2 class="mb-4">Submitted Assignments</h2>
 
-    @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+    @if(count($submissions) > 0)
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Course</th>
+                    <th>Title</th>
+                    <th>Submitted File</th>
+                    <th>Notes</th>
+                    <th>Submission Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($submissions as $submission)
+                    <tr>
+                        <td>{{ $submission->assignment->course->name ?? 'N/A' }}</td>
+                        <td>{{ $submission->assignment->title }}</td>
+                        <td>
+                            <a href="{{ asset('storage/' . $submission->submission_file) }}" target="_blank" class="btn btn-info btn-sm">View File</a>
+                        </td>
+                        <td>{{ $submission->notes }}</td>
+                        <td>{{ $submission->submitted_at->format('Y-m-d H:i:s') }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @else
+        <p>No submitted assignments found.</p>
     @endif
-
-    <table class="table table-bordered mt-4">
-        <thead>
-            <tr>
-                <th>Assignment Title</th>
-                <th>Submitted On</th>
-                <th>Notes</th>
-                <th>Download File</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($submissions as $submission)
-                <tr>
-                    <td>{{ $submission->assignment->title }}</td>
-                    <td>{{ $submission->submitted_at->format('d M Y - h:i A') }}</td>
-                    <td>{{ $submission->notes ?? 'N/A' }}</td>
-                    <td><a href="{{ asset('storage/' . $submission->submission_file) }}" target="_blank">Download</a></td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="4">You haven't submitted any assignments yet.</td>
-                </tr>
-                @endforelse
-        </tbody>
-    </table>
+</div>
 @endsection

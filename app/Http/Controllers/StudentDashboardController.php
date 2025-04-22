@@ -7,6 +7,7 @@ use App\Models\AssignmentSubmission;
 use App\Models\Course;
 use App\Models\Event;
 use App\Models\Lecture;
+use App\Models\Assignment;
 use Illuminate\Support\Facades\Auth;
 
 class StudentDashboardController extends Controller
@@ -21,13 +22,11 @@ class StudentDashboardController extends Controller
     // My Courses
     public function myCourses()
     {
-    
         $student = Auth::user(); // Get the authenticated user (student)
         $courses = $student->courses ?: collect(); // Get courses the student is enrolled in
 
-    return view('student.my_courses', compact('courses')); // Pass courses to the view
+        return view('student.my_courses', compact('courses')); // Pass courses to the view
     }
-
 
     // Available Courses (to join)
     public function viewAvailableCourses()
@@ -48,37 +47,33 @@ class StudentDashboardController extends Controller
         $user = Auth::user();
         $course = Course::findOrFail($id);
 
-    // Prevent duplicate enrollments
-    if (!$user->courses->contains($id)) {
-        $user->courses()->attach($id);
-    }
+        // Prevent duplicate enrollments
+        if (!$user->courses->contains($id)) {
+            $user->courses()->attach($id);
+        }
 
-    return redirect()->route('student.mycourses')->with('success', 'You have successfully joined the course!');
+        return redirect()->route('student.mycourses')->with('success', 'You have successfully joined the course!');
     }
 
     public function leaveCourse($id)
-{
-    $user = Auth::user();
-    $course = Course::findOrFail($id);
+    {
+        $user = Auth::user();
+        $course = Course::findOrFail($id);
 
-    // Detach course from the pivot table
-    $user->courses()->detach($course->id);
+        // Detach course from the pivot table
+        $user->courses()->detach($course->id);
 
-    return redirect()->route('student.mycourses')->with('success', 'You have successfully left the course!');
-}
- 
-    
+        return redirect()->route('student.mycourses')->with('success', 'You have successfully left the course!');
+    }
+
     // Assignments
     public function assignments()
     {
         $student = auth()->user();
-        $assignments = [];
-    
-        foreach ($student->courses as $course) {
-            foreach ($course->assignments as $assignment) {
-                $assignments[] = $assignment;
-            }
-        }
+        $assignments = $student->courses()->with('assignments')->get()->flatMap(function ($course) {
+            return $course->assignments;
+        });
+
         return view('student.assignments', compact('assignments'));
     }
 
@@ -89,16 +84,17 @@ class StudentDashboardController extends Controller
         return view('student.submit-assignment', compact('assignment'));
     }
 
-    // Store Assignment Submission
     public function storeAssignment(Request $request, $id)
     {
         $request->validate([
             'submission_file' => 'required|mimes:pdf,docx,zip|max:20480',
             'notes' => 'nullable|string',
         ]);
-    
+
+        // Store the uploaded file
         $filePath = $request->file('submission_file')->store('submissions', 'public');
-    
+
+        // Create a new assignment submission record
         AssignmentSubmission::create([
             'assignment_id' => $id,
             'student_id' => auth()->id(),
@@ -107,7 +103,8 @@ class StudentDashboardController extends Controller
             'submitted_at' => now(),
         ]);
 
-        return redirect()->route('student.assignments')->with('success', 'Assignment submitted successfully!');
+        // Redirect to the submissions page
+        return redirect()->route('student.submissions')->with('success', 'Assignment submitted successfully!');
     }
 
     // View Submissions
