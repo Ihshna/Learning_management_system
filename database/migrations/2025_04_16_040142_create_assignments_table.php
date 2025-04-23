@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('assignments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('course_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->text('description')->nullable();
             $table->date('due_date')->nullable();
+            $table->unsignedBigInteger('course_id');
+            $table->string('file_path')->nullable();
             $table->timestamps();
         });
     }

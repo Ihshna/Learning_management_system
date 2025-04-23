@@ -125,15 +125,5 @@ public function storeAssignment(Request $request, $id)
         return view('student.view-submissions', compact('submissions'));
     }
 
-    // Notifications
-    public function notifications()
-    {
-        return view('student.notifications');
-    }
-
-    // Profile
-    public function profile()
-    {
-        return view('student.profile');
-    }
+    
 }

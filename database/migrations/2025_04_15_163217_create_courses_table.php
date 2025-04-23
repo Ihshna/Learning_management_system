@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('description')->nullable();
-            $table->enum('status', ['approved', 'pending', 'rejected'])->default('pending'); // Adding the status column
+            $table->string('code')->unique;
+            $table->text('description');
+            $table->string('status')->default('pending'); // Adding the status column
             $table->timestamps();
         });
     }
