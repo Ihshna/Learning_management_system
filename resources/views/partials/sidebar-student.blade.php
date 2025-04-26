@@ -7,19 +7,9 @@
     <a href="{{ route('student.mycourses') }}" class="d-block"><i class="fas fa-book-open me-2"></i>My Courses</a>
 
     <!-- Assignments -->
-    <div class="accordion-item bg-transparent border-0">
-        <h2 class="accordion-header">
-            <button class="accordion-button collapsed bg-transparent text-white" type="button" data-bs-toggle="collapse" data-bs-target="#assignmentsMenu">
-                Assignments
-            </button>
-        </h2>
-        <div id="assignmentsMenu" class="accordion-collapse collapse" data-bs-parent="#studentSidebar">
-            <div class="accordion-body p-0">
-                <a href="{{ url('/student/submit-assignment') }}" class="d-block ps-4">Submit Assignments</a>
-                <a href="{{ url('/student/view-submitted') }}" class="d-block ps-4">View Submitted</a>
-            </div>
-        </div>
-    </div>
+    <a href="{{ route('student.assignments') }}" class="d-block text-white px-3 py-2">
+    <i class="fas fa-tasks me-2"></i>My Assignments
+</a>
 
     <!-- Grades -->
     <a href="{{  route('student.availablecourses') }}" class="d-block"><i class="fas fa-graduation-cap me-2"></i>Available Courses</a>

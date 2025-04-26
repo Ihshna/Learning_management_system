@@ -17,6 +17,7 @@ use App\Http\Controllers\SuperAdminCourseController;
 use App\Http\Controllers\StudentDashboardController;
 use App\Http\Controllers\StudentCourseController;
 use App\Http\Controllers\StudentAvailableCourseController;
+use App\Http\Controllers\StudentAssignmentController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -112,3 +113,8 @@ Route::post('/student/course/leave/{course}', [StudentCourseController::class, '
 
 Route::get('/student/available-courses', [StudentAvailableCourseController::class, 'index'])->name('student.availablecourses');
 Route::post('/student/available-courses/enroll/{course}', [StudentAvailableCourseController::class, 'enroll'])->name('student.availablecourses.enroll');
+
+//Assignments
+Route::get('/student/my-assignments', [StudentAssignmentController::class, 'index'])->name('student.assignments');
+Route::get('/student/submit-assignment/{assignment}', [StudentAssignmentController::class, 'submit'])->name('student.assignment.submit');
+Route::post('/student/submit-assignment/{assignment}', [StudentAssignmentController::class, 'storeSubmission'])->name('student.assignment.store');
