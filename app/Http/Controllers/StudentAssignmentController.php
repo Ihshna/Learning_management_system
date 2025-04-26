@@ -54,5 +54,22 @@ class StudentAssignmentController extends Controller
 
         return redirect()->back()->with('error', 'Failed to upload assignment.');
     }
+
+    public function submittedAssignments()
+{
+    $student = Student::where('user_id', auth()->id())->first();
+
+    if ($student) {
+        $submissions = \App\Models\AssignmentSubmission::where('student_id', $student->id)
+                        ->with('assignment')
+                        ->latest()
+                        ->get();
+    } else {
+        $submissions = collect();
+    }
+
+    return view('student.assignments.submitted', compact('submissions'));
+}
+
 }
 

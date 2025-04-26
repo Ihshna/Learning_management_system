@@ -15,4 +15,9 @@ class AssignmentSubmission extends Model
         'file_path',
         'note',
     ];
+
+    public function assignment()
+{
+    return $this->belongsTo(\App\Models\Assignment::class, 'assignment_id');
+}
 }

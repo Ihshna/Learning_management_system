@@ -15,8 +15,10 @@
     <a href="{{  route('student.availablecourses') }}" class="d-block"><i class="fas fa-graduation-cap me-2"></i>Available Courses</a>
 
     <!-- Announcements -->
-    <a href="{{ url('/student/announcements') }}" class="d-block">View Announcements</a>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <a href="{{ route('student.assignments.submitted') }}" class="d-block text-white px-3 py-2">
+    <i class="fas fa-file-upload me-2"></i> Submitted Assignments
+</a>
+    <br><br><br><br><br><br><br><br><br><br><br>
 <!-- Bottom Logout Button -->
 <div class="p-3">
         <form action="{{ route('logout') }}" method="POST"

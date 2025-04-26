@@ -118,3 +118,4 @@ Route::post('/student/available-courses/enroll/{course}', [StudentAvailableCours
 Route::get('/student/my-assignments', [StudentAssignmentController::class, 'index'])->name('student.assignments');
 Route::get('/student/submit-assignment/{assignment}', [StudentAssignmentController::class, 'submit'])->name('student.assignment.submit');
 Route::post('/student/submit-assignment/{assignment}', [StudentAssignmentController::class, 'storeSubmission'])->name('student.assignment.store');
+Route::get('/student/submitted-assignments', [StudentAssignmentController::class, 'submittedAssignments'])->name('student.assignments.submitted');
