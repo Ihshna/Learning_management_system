@@ -14,7 +14,11 @@ use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\AddAdminController;
 use App\Http\Controllers\SuperAdminCourseController;
+use App\Http\Controllers\StudentDashboardController;
+use App\Http\Controllers\StudentCourseController;
 use Illuminate\Support\Facades\Auth;
+
+
 //Route::get('/', function () {
     //return view('welcome');
 //});
@@ -97,3 +101,7 @@ Route::post('/logout', function () {
     Auth::logout();
     return redirect('/'); // Redirect to landing page
 })->name('logout');
+
+//Student
+Route::get('/student/dashboard', [StudentDashboardController::class, 'index'])->name('student.dashboard');
+Route::get('/student/my-courses', [StudentCourseController::class, 'index'])->name('student.mycourses');
