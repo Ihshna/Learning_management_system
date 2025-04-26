@@ -4,7 +4,7 @@
     <a href="{{ url('/student/dashboard') }}" class="d-block">Dashboard</a>
 
     <!-- My Courses -->
-    <a href="{{ url('/student/my-courses') }}" class="d-block">My Courses</a>
+    <a href="{{ route('student.mycourses') }}" class="d-block"><i class="fas fa-book-open me-2"></i>My Courses</a>
 
     <!-- Assignments -->
     <div class="accordion-item bg-transparent border-0">
@@ -22,7 +22,7 @@
     </div>
 
     <!-- Grades -->
-    <a href="{{ url('/student/grades') }}" class="d-block">Track Grades</a>
+    <a href="{{  route('student.availablecourses') }}" class="d-block"><i class="fas fa-graduation-cap me-2"></i>Available Courses</a>
 
     <!-- Announcements -->
     <a href="{{ url('/student/announcements') }}" class="d-block">View Announcements</a>

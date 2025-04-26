@@ -16,6 +16,7 @@ use App\Http\Controllers\AddAdminController;
 use App\Http\Controllers\SuperAdminCourseController;
 use App\Http\Controllers\StudentDashboardController;
 use App\Http\Controllers\StudentCourseController;
+use App\Http\Controllers\StudentAvailableCourseController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -104,4 +105,10 @@ Route::post('/logout', function () {
 
 //Student
 Route::get('/student/dashboard', [StudentDashboardController::class, 'index'])->name('student.dashboard');
+
 Route::get('/student/my-courses', [StudentCourseController::class, 'index'])->name('student.mycourses');
+Route::get('/student/course/{id}', [StudentCourseController::class, 'show'])->name('student.course.show');
+Route::post('/student/course/leave/{course}', [StudentCourseController::class, 'leave'])->name('student.course.leave');
+
+Route::get('/student/available-courses', [StudentAvailableCourseController::class, 'index'])->name('student.availablecourses');
+Route::post('/student/available-courses/enroll/{course}', [StudentAvailableCourseController::class, 'enroll'])->name('student.availablecourses.enroll');
