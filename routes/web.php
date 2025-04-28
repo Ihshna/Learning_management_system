@@ -18,6 +18,7 @@ use App\Http\Controllers\StudentDashboardController;
 use App\Http\Controllers\StudentCourseController;
 use App\Http\Controllers\StudentAvailableCourseController;
 use App\Http\Controllers\StudentAssignmentController;
+use App\Http\Controllers\AdminLectureRecordingController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -119,3 +120,8 @@ Route::get('/student/my-assignments', [StudentAssignmentController::class, 'inde
 Route::get('/student/submit-assignment/{assignment}', [StudentAssignmentController::class, 'submit'])->name('student.assignment.submit');
 Route::post('/student/submit-assignment/{assignment}', [StudentAssignmentController::class, 'storeSubmission'])->name('student.assignment.store');
 Route::get('/student/submitted-assignments', [StudentAssignmentController::class, 'submittedAssignments'])->name('student.assignments.submitted');
+
+// Admin - Lecture Recordings
+Route::get('/admin/lecture-recordings', [AdminLectureRecordingController::class, 'index'])->name('admin.lecture_recordings.index');
+Route::get('/admin/lecture-recordings/create', [AdminLectureRecordingController::class, 'create'])->name('admin.lecture_recordings.create');
+Route::post('/admin/lecture-recordings/store', [AdminLectureRecordingController::class, 'store'])->name('admin.lecture_recordings.store');

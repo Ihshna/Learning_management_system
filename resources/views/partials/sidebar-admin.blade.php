@@ -63,7 +63,10 @@
             </div>
         </div>
     </div>
-    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <a href="{{ route('admin.lecture_recordings.index') }}" class="d-block text-white px-3 py-2">
+    <i class="fas fa-video me-2"></i> Manage Lecture Recordings
+</a>
+    <br><br><br><br><br><br><br><br><br><br>
 <!-- Bottom Logout Button -->
 <div class="p-3">
         <form action="{{ route('logout') }}" method="POST"
