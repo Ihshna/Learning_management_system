@@ -15,20 +15,13 @@
             <textarea name="description" class="form-control" required>{{ $assignment->description }}</textarea>
         </div>
         <div class="mb-3">
-    <label for="course_id" class="form-label text-dark">Select Approved Course</label>
-    <select name="course_id" id="course_id" class="form-select bg-white text-dark" required>
-        <option value="">-- Select Approved Course --</option>
-        @foreach($courses as $course)
-            <option 
-                value="{{ $course->id }}" 
-                {{ $assignment->course_id == $course->id ? 'selected' : '' }}
-                style="background-color: white; color: black;"
-            >
-                {{ $course->title }}
-            </option>
-        @endforeach
-    </select>
-</div>
+            <label>Course</label>
+            <select name="course_id" class="form-control" required>
+                @foreach ($courses as $course)
+                    <option value="{{ $course->id }}" {{ $assignment->course_id == $course->id ? 'selected' : '' }}>{{ $course->name }}</option>
+                @endforeach
+            </select>
+        </div>
         <div class="mb-3">
             <label>Due Date</label>
             <input type="date" name="due_date" class="form-control" value="{{ $assignment->due_date }}" required>

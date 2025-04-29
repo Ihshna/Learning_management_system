@@ -32,7 +32,7 @@ public function index() {
 
 public function edit($id) {
     $assignment = Assignment::findOrFail($id);
-    $courses = Course::where('status','approved')->get();
+    $courses = Course::all();
     return view('admin.assignments.edit', compact('assignment', 'courses'));
 }
 
