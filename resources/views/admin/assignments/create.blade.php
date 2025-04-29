@@ -13,15 +13,18 @@
             <label>Description</label>
             <textarea name="description" class="form-control" required></textarea>
         </div>
+        
         <div class="mb-3">
-            <label>Course</label>
-            <select name="course_id" class="form-control" required>
-                <option disabled selected>Select Course</option>
-                @foreach ($courses as $course)
-                    <option value="{{ $course->id }}">{{ $course->name }}</option>
-                @endforeach
-            </select>
-        </div>
+    <label for="course_id" class="form-label text-dark">Select Course</label>
+    <select name="course_id" id="course_id" class="form-select bg-white text-dark" required>
+        <option value="">-- Select Course --</option>
+        @foreach($courses as $course)
+            <option value="{{ $course->id }}" style="background-color: white; color: black;">
+                {{ $course->title }}
+            </option>
+        @endforeach
+    </select>
+</div>
         <div class="mb-3">
             <label>Due Date</label>
             <input type="date" name="due_date" class="form-control" required>

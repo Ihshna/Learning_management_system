@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 class AssignmentController extends Controller
 {
 public function create() {
-    $courses = Course::all();
+    $courses = Course::where('status','approved')->get();
     return view('admin.assignments.create', compact('courses'));
 }
 
