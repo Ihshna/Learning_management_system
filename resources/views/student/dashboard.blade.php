@@ -1,18 +1,18 @@
-@extends('layouts.dashboard') 
+@extends('layouts.dashboard')
 
 @section('content')
 <div class="container-fluid py-4">
 
     <!-- Greeting -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-4 animate_animated animate_fadeInDown">
         <h3>Welcome back, {{ auth()->user()->name }}!</h3>
         <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}" alt="Profile" class="rounded-circle" width="50">
     </div>
 
     <!-- Stat Cards with Progress -->
     <div class="row mb-4">
-        <div class="col-md-4">
-            <div class="card shadow-sm">
+        <div class="col-md-4 animate_animated animate_fadeInLeft">
+            <div class="card shadow-sm hover-effect">
                 <div class="card-body">
                     <h5 class="card-title">Projects</h5>
                     <h3 class="fw-bold">{{ $projects }}</h3>
@@ -22,8 +22,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card shadow-sm">
+        <div class="col-md-4 animate_animated animate_fadeInUp">
+            <div class="card shadow-sm hover-effect">
                 <div class="card-body">
                     <h5 class="card-title">Courses</h5>
                     <h3 class="fw-bold">{{ $courses }}</h3>
@@ -33,8 +33,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card shadow-sm">
+        <div class="col-md-4 animate_animated animate_fadeInRight">
+            <div class="card shadow-sm hover-effect">
                 <div class="card-body">
                     <h5 class="card-title">Members</h5>
                     <h3 class="fw-bold">{{ $members }}</h3>
@@ -49,25 +49,32 @@
     <!-- Lecture Recordings + Notifications -->
     <div class="row mb-4">
         <!-- Left: Lecture Recordings -->
-        <div class="col-md-8">
+        <div class="col-md-8 animate_animated animate_fadeInUp">
             <h4>Lecture Recordings</h4>
             @forelse($recordings as $rec)
-                <div class="card mb-2 shadow-sm">
+                <div class="card mb-4 shadow-sm hover-effect">
                     <div class="card-body">
                         <h6 class="card-title">{{ $rec->title }}</h6>
-                        <p class="card-text">{{ $rec->description }}</p>
-                        <a href="{{ asset('storage/' . $rec->file_path) }}" target="_blank" class="btn btn-outline-primary btn-sm">Watch Now</a>
+
+                        <div class="ratio ratio-16x9" style="max-width:450px; margin:auto;">
+                            <iframe 
+                                src="{{ str_replace('watch?v=', 'embed/', $rec->file_path) }}" 
+                                frameborder="0" allowfullscreen class="rounded">
+                            </iframe>
+                        </div>
+
+                        <p class="card-text small">{{ $rec->description }}</p>
                     </div>
                 </div>
             @empty
-                <div class="alert alert-info">No recordings yet.</div>
+                <div class="alert alert-info">No lecture recordings yet.</div>
             @endforelse
         </div>
 
         <!-- Right: Notifications -->
-        <div class="col-md-4">
+        <div class="col-md-4 animate_animated animate_fadeInRight">
             <h4>Notifications</h4>
-            <div class="card shadow-sm">
+            <div class="card shadow-sm hover-effect">
                 <div class="card-body">
                     <ul class="list-unstyled">
                         <li><i class="fas fa-bell me-2 text-warning"></i> Assignment due this week</li>
@@ -81,9 +88,9 @@
 
     <!-- Bottom: Upcoming Events -->
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 animate_animated animate_fadeInUp">
             <h4>Upcoming Events</h4>
-            <div class="card shadow-sm">
+            <div class="card shadow-sm hover-effect">
                 <div class="card-body">
                     <ul class="list-group">
                         @forelse($events as $event)

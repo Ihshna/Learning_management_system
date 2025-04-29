@@ -17,7 +17,7 @@
         <h5 class="card-title">{{ $recording->title }}</h5>
         <p class="card-text">{{ $recording->description }}</p>
 
-        <div class="ratio ratio-16x9 mb-3">
+        <div class="ratio ratio-16x9" style="max-width:450px; margin:auto;">
             <iframe 
                 src="{{ str_replace('watch?v=', 'embed/', $recording->file_path) }}" 
                 frameborder="0" 

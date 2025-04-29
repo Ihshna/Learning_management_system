@@ -1,7 +1,7 @@
 <div class="accordion" id="studentSidebar">
 
     <!-- Dashboard -->
-    <a href="{{ url('/student/dashboard') }}" class="d-block">Dashboard</a>
+    <a href="{{ route('student.dashboard') }}" class="d-block">Dashboard</a>
 
     <!-- My Courses -->
     <a href="{{ route('student.mycourses') }}" class="d-block"><i class="fas fa-book-open me-2"></i>My Courses</a>
