@@ -25,6 +25,13 @@
                 class="rounded">
             </iframe>
         </div>
+        <form action="{{ route('admin.lecture-recordings.destroy', $recording->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this recording?')">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-sm btn-danger mt-2">
+                <i class="fas fa-trash-alt me-1"></i> Remove Recording
+            </button>
+        </form>
     </div>
 </div>
         @empty

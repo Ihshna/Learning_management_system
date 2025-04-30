@@ -125,3 +125,4 @@ Route::get('/student/submitted-assignments', [StudentAssignmentController::class
 Route::get('/admin/lecture-recordings', [AdminLectureRecordingController::class, 'index'])->name('admin.lecture_recordings.index');
 Route::get('/admin/lecture-recordings/create', [AdminLectureRecordingController::class, 'create'])->name('admin.lecture_recordings.create');
 Route::post('/admin/lecture-recordings/store', [AdminLectureRecordingController::class, 'store'])->name('admin.lecture_recordings.store');
+Route::delete('/admin/lecture-recordings/{id}', [AdminLectureRecordingController::class, 'destroy'])->name('admin.lecture-recordings.destroy');

@@ -38,4 +38,14 @@ class AdminLectureRecordingController extends Controller
 
         return redirect()->route('admin.lecture_recordings.index')->with('success', 'Lecture Recording added successfully!');
     }
+
+    public function destroy($id)
+{
+    $recording = LectureRecording::findOrFail($id);
+
+    // Delete the recording
+    $recording->delete();
+
+    return redirect()->back()->with('success', 'Lecture recording deleted successfully.');
+}
 }

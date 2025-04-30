@@ -22,7 +22,7 @@
             @forelse($assignments as $assignment)
                 <tr>
                     <td>{{ $assignment->title }}</td>
-                    <td>{{ $assignment->course->name ?? 'N/A' }}</td>
+                    <td>{{ $assignment->course->title ?? 'N/A' }}</td>
                     <td>{{ $assignment->due_date }}</td>
                     <td>{{ ucfirst($assignment->status) }}</td>
                     <td>
