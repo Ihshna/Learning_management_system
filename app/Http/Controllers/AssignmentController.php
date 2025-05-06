@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Assignment;
 use App\Models\Course;
+use App\Models\AssignmentSubmission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -46,4 +47,14 @@ public function delete($id) {
     Assignment::findOrFail($id)->delete();
     return back()->with('success', 'Assignment Deleted Successfully');
 }
+public function viewSubmissions()
+
+    {
+        // Get all submissions with related assignment and student
+        $submissions = AssignmentSubmission::with(['assignment', 'student'])->get();
+
+        return view('admin.assignments.submissions', compact('submissions'));
+    }
+
+    
 }

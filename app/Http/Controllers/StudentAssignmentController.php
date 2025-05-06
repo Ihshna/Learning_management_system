@@ -15,7 +15,20 @@ class StudentAssignmentController extends Controller
 
         if ($student) {
             $courses = $student->courses->pluck('id');
-            $assignments = Assignment::whereIn('course_id', $courses)->latest()->get();
+
+            // Updated part: load assignments + submissions for the logged-in student
+            $assignments = Assignment::whereIn('course_id', $courses)
+                ->with(['submissions' => function($query) use ($student) {
+                    $query->where('student_id', $student->id);
+                }])
+                ->latest()
+                ->get();
+
+            // Mark assignments as submitted or not
+            foreach ($assignments as $assignment) {
+                $assignment->is_submitted = $assignment->submissions->isNotEmpty();
+            }
+
         } else {
             $assignments = collect();
         }
@@ -56,20 +69,18 @@ class StudentAssignmentController extends Controller
     }
 
     public function submittedAssignments()
-{
-    $student = Student::where('user_id', auth()->id())->first();
+    {
+        $student = Student::where('user_id', auth()->id())->first();
 
-    if ($student) {
-        $submissions = \App\Models\AssignmentSubmission::where('student_id', $student->id)
-                        ->with('assignment')
-                        ->latest()
-                        ->get();
-    } else {
-        $submissions = collect();
+        if ($student) {
+            $submissions = AssignmentSubmission::where('student_id', $student->id)
+                ->with('assignment')
+                ->latest()
+                ->get();
+        } else {
+            $submissions = collect();
+        }
+
+        return view('student.assignments.submitted', compact('submissions'));
     }
-
-    return view('student.assignments.submitted', compact('submissions'));
 }
-
-}
-
