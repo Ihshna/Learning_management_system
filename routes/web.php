@@ -73,6 +73,9 @@ Route::get('/admin/assignments/manage', [AssignmentController::class, 'index'])-
 Route::get('/admin/assignments/edit/{id}', [AssignmentController::class, 'edit'])->name('admin.assignments.edit');
 Route::post('/admin/assignments/update/{id}', [AssignmentController::class, 'update'])->name('admin.assignments.update');
 Route::get('/admin/assignments/delete/{id}', [AssignmentController::class, 'delete'])->name('admin.assignments.delete');
+Route::get('/admin/assignments/submissions', [AssignmentController::class, 'viewSubmissions'])->name('admin.assignments.submissions');
+
+
 
 //Feedback
 Route::post('/feedback',[FeedbackController::class,'store'])->name('feedback.store');
