@@ -13,6 +13,7 @@ class AssignmentSubmission extends Model
         'assignment_id',
         'student_id',
         'file_path',
+        'note'
     ];
 
     public function assignment()
