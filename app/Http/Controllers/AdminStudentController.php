@@ -34,7 +34,9 @@ class AdminStudentController extends Controller
         Student::create([
             'user_id' => $user->id,
             'enrollment_no' => $request->enrollment_no,
-            'enrollment_date' => $request->enrollment_date
+            'enrollment_date' => $request->enrollment_date,
+            'status' => 'pending',
+            'created_by'=> auth()->user()->id,
         ]);
 
         session()->flash('success','Student added successfully');

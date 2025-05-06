@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('enrollment_no')->unique();
             $table->date('enrollment_date');
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

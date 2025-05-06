@@ -20,7 +20,7 @@ use App\Http\Controllers\StudentAvailableCourseController;
 use App\Http\Controllers\StudentAssignmentController;
 use App\Http\Controllers\AdminLectureRecordingController;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\SuperAdminStudentController;
 
 //Route::get('/', function () {
     //return view('welcome');
@@ -126,3 +126,12 @@ Route::get('/admin/lecture-recordings', [AdminLectureRecordingController::class,
 Route::get('/admin/lecture-recordings/create', [AdminLectureRecordingController::class, 'create'])->name('admin.lecture_recordings.create');
 Route::post('/admin/lecture-recordings/store', [AdminLectureRecordingController::class, 'store'])->name('admin.lecture_recordings.store');
 Route::delete('/admin/lecture-recordings/{id}', [AdminLectureRecordingController::class, 'destroy'])->name('admin.lecture-recordings.destroy');
+
+
+//Approval student
+Route::get('/superadmin/student/pending', [SuperAdminStudentController::class, 'pending'])->name('superadmin.student.pending');
+Route::post('/superadmin/student/approve/{id}', [SuperAdminStudentController::class, 'approve'])->name('superadmin.student.approve');
+Route::post('/superadmin/student/reject/{id}', [SuperAdminStudentController::class, 'reject'])->name('superadmin.student.reject');
+
+//Approved student
+Route::get('/superadmin/student/approved', [SuperAdminStudentController::class, 'approved'])->name('superadmin.student.approved');
