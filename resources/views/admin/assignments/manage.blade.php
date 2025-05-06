@@ -24,7 +24,13 @@
                     <td>{{ $assignment->title }}</td>
                     <td>{{ $assignment->course->title ?? 'N/A' }}</td>
                     <td>{{ $assignment->due_date }}</td>
-                    <td>{{ ucfirst($assignment->status) }}</td>
+                    <td>
+                        @if($assignment->submissions->count() > 0)
+                            Submitted
+                        @else
+                            Pending
+                        @endif
+                    </td>
                     <td>
                         <a href="{{ route('admin.assignments.edit', $assignment->id) }}" class="btn btn-primary btn-sm">Edit</a>
                         <a href="{{ route('admin.assignments.delete', $assignment->id) }}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm">Delete</a>

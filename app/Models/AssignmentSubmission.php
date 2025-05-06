@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class AssignmentSubmission extends Model
 {
@@ -13,11 +13,15 @@ class AssignmentSubmission extends Model
         'assignment_id',
         'student_id',
         'file_path',
-        'note',
     ];
 
     public function assignment()
-{
-    return $this->belongsTo(\App\Models\Assignment::class, 'assignment_id');
-}
+    {
+        return $this->belongsTo(Assignment::class);
+    }
+
+    public function student()
+    {
+        return $this->belongsTo(User::class, 'student_id');
+    }
 }
