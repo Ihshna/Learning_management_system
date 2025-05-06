@@ -17,30 +17,43 @@ class LoginController extends Controller
     // Handle login
     public function login(Request $request)
     {
-        // Validate the request
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|min:6',
         ]);
-
-        // Attempt to log the user in
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            // Get the authenticated user
-            $user = Auth::user();
-
-            // Check user role and redirect to appropriate dashboard
-            if ($user->role == 'super_admin') {
+    
+        // Get the user first
+        $user = \App\Models\User::where('email', $request->email)->first();
+    
+        if (!$user) {
+            return back()->withErrors(['email' => 'Invalid credentials.']);
+        }
+    
+        // Prepare credentials
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
+    
+        // Add status to credentials if student
+        if ($user->role === 'student') {
+            $credentials['status'] = 'approved';
+        }
+    
+        // Try to login
+        if (Auth::attempt($credentials)) {
+            if ($user->role === 'super_admin') {
                 return redirect()->route('superadmin.dashboard');
-            } elseif ($user->role == 'admin') {
+            } elseif ($user->role === 'admin') {
                 return redirect()->route('admin.dashboard');
-            } elseif ($user->role == 'student') {
+            } elseif ($user->role === 'student') {
                 return redirect()->route('student.dashboard');
             }
         }
-
-        // If login fails, return back with an error
-        return back()->withErrors(['email' => 'Invalid credentials.']);
+    
+        return back()->withErrors(['email' => 'Invalid credentials or account not approved.']);
     }
+    
 
     // Handle logout
     public function logout()
@@ -49,4 +62,3 @@ class LoginController extends Controller
         return redirect()->route('login');
     }
 }
-

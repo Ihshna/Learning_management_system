@@ -122,8 +122,7 @@
                 <select name="role" required style="width:100%; padding:12px; border-radius:25px; margin-top:10px;">
                 <option value="">Select Role</option>
         <option value="student">Student</option>
-        <option value="admin">Admin</option>
-        <option value="superadmin">Super Admin</option>
+      
 </select>
                 </select>
                 <button type="submit">SIGN UP</button>

@@ -29,10 +29,26 @@
             <div class="accordion-body p-0">
                 <a href="{{ route('superadmin.courses.pending') }}" class="d-block ps-4">Pending Requests</a>
                 <a href="{{ route('superadmin.courses.approved') }}" class="d-block ps-4">Approved Courses</a>
+            </div>
+        </div>
+    </div>
+   
+     <!-- Student Requests -->
+     <div class="accordion-item bg-transparent border-0">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed bg-transparent text-white" type="button" data-bs-toggle="collapse" data-bs-target="#studentRequestMenu">
+                Student Requests
+            </button>
+        </h2>
+        <div id="studentRequestMenu" class="accordion-collapse collapse" data-bs-parent="#superadminSidebar">
+            <div class="accordion-body p-0">
+                <a href="{{ route('superadmin.student.pending') }}" class="d-block ps-4">Pending Requests</a>
+                <a href="{{ route('superadmin.student.approved') }}" class="d-block ps-4">Approved Students</a>
                 
             </div>
         </div>
-    </div><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
     <!-- Bottom Logout Button -->
     <div class="p-3">

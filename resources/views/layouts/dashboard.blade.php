@@ -56,7 +56,7 @@
                 <img src="{{asset('images/logo.jpeg') }}" class="rounded-circle d-block mx-auto" alt="Logo"
                  style="width:100px; height:100px; object-fit: cover;">
 </div>
-            @php $role = Auth::user()->role; @endphp
+            @php $role = Auth::check() ? Auth::user()->role : null; @endphp
 
             @if($role == 'superadmin')
                 @include('partials.sidebar-superadmin')
