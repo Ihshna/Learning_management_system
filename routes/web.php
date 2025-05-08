@@ -19,6 +19,8 @@ use App\Http\Controllers\StudentCourseController;
 use App\Http\Controllers\StudentAvailableCourseController;
 use App\Http\Controllers\StudentAssignmentController;
 use App\Http\Controllers\AdminLectureRecordingController;
+use App\Http\Controllers\AdminCourseRequestController;
+
 use Illuminate\Support\Facades\Auth;
 
 
@@ -137,3 +139,8 @@ Route::get('/superadmin/students/approved', [SuperAdminController::class, 'appro
 
 //Course request
 Route::post('/student/courses/{courseId}/request', [StudentCourseController::class, 'requestCourse'])->name('student.course.request');
+Route::get('/admin/course-requests', [AdminCourseRequestController::class, 'index'])->name('admin.course.requests');
+Route::post('/admin/course-requests/{id}/approve', [AdminCourseRequestController::class, 'approve'])->name('admin.course.requests.approve');
+Route::post('/admin/course-requests/{id}/reject', [AdminCourseRequestController::class, 'reject'])->name('admin.course.requests.reject');
+
+

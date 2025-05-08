@@ -34,7 +34,7 @@
                             @endphp
 
                             @if($enrolled)
-                                  <button class="btn btn-secondary btn-sm w-100" disabled>Already Enrolled</button>
+                                <button class="btn btn-secondary btn-sm w-100" disabled>Already Enrolled</button>
                             @elseif($courseRequest)
                                 <button class="btn btn-warning btn-sm w-100" disabled>{{ ucfirst($courseRequest->status) }}</button>
                             @else
