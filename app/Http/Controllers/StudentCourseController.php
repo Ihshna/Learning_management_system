@@ -12,17 +12,12 @@ class StudentCourseController extends Controller
 {
     public function index()
     {
-        $student = Student::where('user_id', auth()->id())->first();
+        $user = auth()->user();
 
-        if ($student) {
-            $courses = $student
-            ? $student->courses()->withPivot('created_at')->get()
-            : collect();       
-        } else {
-            $courses = collect();
-        }
+        $courses = $user->enrolledCourses()->withPivot('created_at')->get();
 
         return view('student.mycourses', compact('courses'));
+
     }
 
     public function show($id)
@@ -33,14 +28,20 @@ class StudentCourseController extends Controller
 
     public function leave($courseId)
     {
-        $student = Student::where('user_id', auth()->id())->first();
+        $user = auth()->user();
 
-        if ($student) {
-            $student->courses()->detach($courseId);
-            return redirect()->back()->with('success', 'You have successfully left the course.');
-        }
+    // Remove from pivot table
+    $user->enrolledCourses()->detach($courseId);
 
-        return redirect()->back()->with('error', 'Unable to leave the course.');
+    
+    CourseRequest::where('student_id', $user->id)
+        ->where('course_id', $courseId)
+        ->where('status', 'approved')
+        ->delete();
+
+    return redirect()->back()->with('success', 'You have successfully left the course.');
+
+    
     }
 
     public function requestCourse($courseId)

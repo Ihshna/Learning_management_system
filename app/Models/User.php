@@ -46,4 +46,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function enrolledCourses()
+    {
+    return $this->belongsToMany(Course::class, 'course_student', 'student_id', 'course_id')->withTimestamps();
+    }
+
 }

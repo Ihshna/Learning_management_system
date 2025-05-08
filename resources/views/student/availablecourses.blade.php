@@ -21,16 +21,16 @@
                         <p class="card-text">{{ Str::limit($course->description, 80) }}</p>
 
                         <div class="mt-auto">
-                            <!-- View Details Button -->
+                            <!-- View Details -->
                             <a href="{{ route('student.course.show', $course->id) }}" class="btn btn-primary btn-sm w-100 mb-2">View Details</a>
 
-                            <!-- Join Course Button -->
                             @php
-                               $student = \App\Models\Student::where('user_id', auth()->id())->first();
-                               $enrolled = $student ? $student->courses->contains($course->id) : false;
-                               $courseRequest = \App\Models\CourseRequest::where('student_id', auth()->id())
-                                 ->where('course_id', $course->id)
-                                 ->first();
+                                $user = auth()->user();
+                                $enrolled = $user->enrolledCourses->contains($course->id);
+
+                                $courseRequest = \App\Models\CourseRequest::where('student_id', $user->id)
+                                    ->where('course_id', $course->id)
+                                    ->first();
                             @endphp
 
                             @if($enrolled)
@@ -38,10 +38,10 @@
                             @elseif($courseRequest)
                                 <button class="btn btn-warning btn-sm w-100" disabled>{{ ucfirst($courseRequest->status) }}</button>
                             @else
-                               <form method="POST" action="{{ route('student.course.request', $course->id) }}">
-                            @csrf
-                              <button type="submit" class="btn btn-success btn-sm w-100">Join Course</button>
-                              </form>
+                                <form method="POST" action="{{ route('student.course.request', $course->id) }}">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success btn-sm w-100">Join Course</button>
+                                </form>
                             @endif
 
                         </div>
@@ -50,7 +50,7 @@
             </div>
         @empty
             <div class="col-12">
-                <div class="alert alert-info">No courses available at the moment.</div>
+                <div class="alert alert-info text-center">No courses available at the moment.</div>
             </div>
         @endforelse
     </div>
