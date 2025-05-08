@@ -27,7 +27,39 @@ class SuperAdminController extends Controller
     }
 
     
+    public function pendingStudents()
+       {
+        $students = User::where('role', 'student')->where('status', 'pending')->get();
+         return view('superadmin.students.pending', compact('students'));
+      }
 
+    public function approveStudent($id)
+      {
+         $student = User::findOrFail($id);
+         $student->status = 'approved';
+         $student->save();
+
+    return back()->with('success', 'Student approved successfully.');
+    }
+
+     public function rejectStudent($id)
+    {
+       $student = User::findOrFail($id);
+       $student->status = 'rejected';
+       $student->save();
+
+    return back()->with('success', 'Student rejected.');
+    }
+
+    public function approvedStudents()
+    {
+    $students = User::where('role', 'student')
+                    ->where('status', 'approved')
+                    ->latest()
+                    ->get();
+
+    return view('superadmin.students.approved', compact('students'));
+    }
 
 }
 

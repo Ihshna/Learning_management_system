@@ -42,8 +42,8 @@
         </h2>
         <div id="studentRequestMenu" class="accordion-collapse collapse" data-bs-parent="#superadminSidebar">
             <div class="accordion-body p-0">
-                <a href="{{ route('superadmin.student.pending') }}" class="d-block ps-4">Pending Requests</a>
-                <a href="{{ route('superadmin.student.approved') }}" class="d-block ps-4">Approved Students</a>
+                <a href="{{ route('superadmin.students.pending') }}" class="d-block ps-4">Pending Requests</a>
+                <a href="{{ route('superadmin.students.approved') }}" class="d-block ps-4">Approved Students</a>
                 
             </div>
         </div>
