@@ -28,9 +28,10 @@ class RegisterController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role,
+            'role' => 'student',
+            'status'=>'pending',
         ]);
 
-        return redirect('/login')->with('success', 'Registration successful! Login now.');
+        return redirect('/register')->with('status', 'Registered Successfully!Waiting for admin approval');
     }
 }

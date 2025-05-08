@@ -111,6 +111,12 @@
         </div>
         <div class="right">
             <h2>Create Account</h2>
+            @if(session('status'))
+             <div style="color: blue; font-weight: bold; margin-bottom: 10px; text-align: center;">
+                {{ session('status')}}
+             </div>
+             
+            @endif 
             <form method="POST" action="{{ route('register') }}">
                 @csrf
                 <input type="text" name="name" placeholder="Name" required>

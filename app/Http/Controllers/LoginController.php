@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class LoginController extends Controller
 {
-    // Show the login form
+    // Show login form
     public function showLoginForm()
     {
         return view('auth.login');
@@ -18,47 +19,46 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
+            'email'    => 'required|email',
             'password' => 'required|min:6',
         ]);
-    
-        // Get the user first
-        $user = \App\Models\User::where('email', $request->email)->first();
-    
-        if (!$user) {
-            return back()->withErrors(['email' => 'Invalid credentials.']);
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return back()->with('error','Invalid username or password');
         }
-    
-        // Prepare credentials
-        $credentials = [
-            'email' => $request->email,
-            'password' => $request->password,
-        ];
-    
-        // Add status to credentials if student
-        if ($user->role === 'student') {
-            $credentials['status'] = 'approved';
+
+        
+
+        // Login the user
+        Auth::login($user);
+
+        // Redirect based on role
+        if ($user->role === 'superadmin') {
+            return redirect()->route('superadmin.dashboard');
+        } elseif ($user->role === 'admin') {
+            return redirect()->route('admin.dashboard');
         }
-    
-        // Try to login
-        if (Auth::attempt($credentials)) {
-            if ($user->role === 'super_admin') {
-                return redirect()->route('superadmin.dashboard');
-            } elseif ($user->role === 'admin') {
-                return redirect()->route('admin.dashboard');
-            } elseif ($user->role === 'student') {
+        elseif($user->role === 'student' && $user->status === 'pending') {
+                return redirect('/login')->with('status', 'Account Waiting for admin approval');
+            }
+        elseif($user->role === 'student' && $user->status === 'approved'){
                 return redirect()->route('student.dashboard');
             }
-        }
-    
-        return back()->withErrors(['email' => 'Invalid credentials or account not approved.']);
+        
+            return redirect('/');
+        
     }
-    
+       
+       
 
-    // Handle logout
+         // Logout
     public function logout()
     {
         Auth::logout();
         return redirect()->route('login');
     }
 }
+
+   
