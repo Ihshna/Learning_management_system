@@ -26,18 +26,24 @@
 
                             <!-- Join Course Button -->
                             @php
-                                $student = \App\Models\Student::where('user_id', auth()->id())->first();
-                                $enrolled = $student ? $student->courses->contains($course->id) : false;
+                               $student = \App\Models\Student::where('user_id', auth()->id())->first();
+                               $enrolled = $student ? $student->courses->contains($course->id) : false;
+                               $courseRequest = \App\Models\CourseRequest::where('student_id', auth()->id())
+                                 ->where('course_id', $course->id)
+                                 ->first();
                             @endphp
 
-                            @if(!$enrolled)
-                                <form method="POST" action="{{ route('student.availablecourses.enroll', $course->id) }}">
-                                    @csrf
-                                    <button type="submit" class="btn btn-success btn-sm w-100">Join Course</button>
-                                </form>
+                            @if($enrolled)
+                                  <button class="btn btn-secondary btn-sm w-100" disabled>Already Enrolled</button>
+                            @elseif($courseRequest)
+                                <button class="btn btn-warning btn-sm w-100" disabled>{{ ucfirst($courseRequest->status) }}</button>
                             @else
-                                <button class="btn btn-secondary btn-sm w-100" disabled>Already Enrolled</button>
+                               <form method="POST" action="{{ route('student.course.request', $course->id) }}">
+                            @csrf
+                              <button type="submit" class="btn btn-success btn-sm w-100">Join Course</button>
+                              </form>
                             @endif
+
                         </div>
                     </div>
                 </div>

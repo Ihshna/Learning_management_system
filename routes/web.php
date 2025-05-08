@@ -134,3 +134,6 @@ Route::post('/superadmin/students/{id}/approve', [SuperAdminController::class, '
 Route::post('/superadmin/students/{id}/reject', [SuperAdminController::class, 'rejectStudent'])->name('superadmin.students.reject');
 //Approved students
 Route::get('/superadmin/students/approved', [SuperAdminController::class, 'approvedStudents'])->name('superadmin.students.approved');
+
+//Course request
+Route::post('/student/courses/{courseId}/request', [StudentCourseController::class, 'requestCourse'])->name('student.course.request');
