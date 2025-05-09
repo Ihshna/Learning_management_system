@@ -11,29 +11,24 @@ class StudentAssignmentController extends Controller
 {
     public function index()
     {
-        $student = Student::where('user_id', auth()->id())->first();
+        $user = auth()->user();
 
-        if ($student) {
-            $courses = $student->courses->pluck('id');
-
-            // Updated part: load assignments + submissions for the logged-in student
-            $assignments = Assignment::whereIn('course_id', $courses)
-                ->with(['submissions' => function($query) use ($student) {
-                    $query->where('student_id', $student->id);
-                }])
-                ->latest()
-                ->get();
-
-            // Mark assignments as submitted or not
-            foreach ($assignments as $assignment) {
-                $assignment->is_submitted = $assignment->submissions->isNotEmpty();
-            }
-
-        } else {
-            $assignments = collect();
+        $courses = $user->enrolledCourses()->pluck('course_id'); // Get course IDs from pivot
+    
+        // Load assignments from those courses + check if already submitted
+        $assignments = Assignment::whereIn('course_id', $courses)
+            ->with(['submissions' => function($query) use ($user) {
+                $query->where('student_id', $user->id); 
+            }])
+            ->latest()
+            ->get();
+    
+        foreach ($assignments as $assignment) {
+            $assignment->is_submitted = $assignment->submissions->isNotEmpty();
         }
-
+    
         return view('student.assignments.index', compact('assignments'));
+    
     }
 
     public function submit($id)
@@ -49,7 +44,7 @@ class StudentAssignmentController extends Controller
             'note' => 'nullable|string',
         ]);
 
-        $student = Student::where('user_id', auth()->id())->first();
+        $user = auth()->user();
         $assignment = Assignment::findOrFail($id);
 
         if ($request->hasFile('file')) {
@@ -57,7 +52,7 @@ class StudentAssignmentController extends Controller
 
             AssignmentSubmission::create([
                 'assignment_id' => $assignment->id,
-                'student_id' => $student->id,
+                'student_id' => auth()->id(),
                 'file_path' => $filePath,
                 'note' => $request->note,
             ]);
@@ -70,10 +65,10 @@ class StudentAssignmentController extends Controller
 
     public function submittedAssignments()
     {
-        $student = Student::where('user_id', auth()->id())->first();
+        $user = auth()->user();
 
-        if ($student) {
-            $submissions = AssignmentSubmission::where('student_id', $student->id)
+        if ($user) {
+            $submissions = AssignmentSubmission::where('student_id', $user->id)
                 ->with('assignment')
                 ->latest()
                 ->get();

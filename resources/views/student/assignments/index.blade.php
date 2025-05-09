@@ -19,7 +19,11 @@
                         <p class="text-muted small">Due Date: {{ \Carbon\Carbon::parse($assignment->due_date)->format('d M Y') }}</p>
 
                         <div class="mt-auto">
-                            <a href="{{ route('student.assignment.submit', $assignment->id) }}" class="btn btn-primary btn-sm w-100 mt-2">Submit Assignment</a>
+                            @if($assignment->is_submitted)
+                               <button class="btn btn-success btn-sm w-100 mt-2" disabled>Already Submitted</button>
+                            @else
+                                <a href="{{ route('student.assignment.submit', $assignment->id) }}" class="btn btn-primary btn-sm w-100 mt-2">Submit Assignment</a>
+                            @endif
                         </div>
                     </div>
                 </div>
