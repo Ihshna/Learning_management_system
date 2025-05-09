@@ -68,7 +68,7 @@
                 <p class="lead text-white">Learn. Grow. Achieve.</p>
                 <div>
                     <a href="{{ route('login') }}" class="btn btn-primary me-2">Login</a>
-                    <a href="{{ route('register') }}" class="btn btn-outline-light">Register</a>
+                    
                 </div>
             </div>
         </div>
