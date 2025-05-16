@@ -38,10 +38,10 @@
                             @elseif($courseRequest)
                                 <button class="btn btn-warning btn-sm w-100" disabled>{{ ucfirst($courseRequest->status) }}</button>
                             @else
-                                <form method="POST" action="{{ route('student.course.request', $course->id) }}">
-                                    @csrf
-                                    <button type="submit" class="btn btn-success btn-sm w-100">Join Course</button>
-                                </form>
+                                <form method="GET" action="{{ route('student.course.payment', $course->id) }}">
+    @csrf
+    <button type="submit" class="btn btn-success btn-sm w-100">Join Course</button>
+</form>
                             @endif
 
                         </div>

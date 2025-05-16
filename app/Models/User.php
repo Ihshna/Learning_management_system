@@ -51,5 +51,10 @@ class User extends Authenticatable
     {
     return $this->belongsToMany(Course::class, 'course_student', 'student_id', 'course_id')->withTimestamps();
     }
+    
+    public function payments() {
+    return $this->hasMany(Payment::class, 'student_id');
+}
+
 
 }
