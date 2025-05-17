@@ -151,7 +151,7 @@ Route::post('/admin/payment/{id}/reject', [AdminController::class, 'rejectPaymen
 
 //student controller payment
 Route::get('/student/course/{id}/payment', [StudentController::class, 'paymentForm'])
-    ->name('student.course.payment');
+    ->name('student.course.payment.form');
 Route::post('/student/course/{id}/payment', [StudentController::class, 'submitPayment'])
     ->name('student.course.payment.submit');
 
