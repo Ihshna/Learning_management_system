@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -6,6 +7,7 @@ use App\Models\Course;
 use App\Models\User;
 use App\Models\LectureRecording;
 use App\Models\Event;
+use App\Models\Assignment; // ✅ Add this
 
 class StudentDashboardController extends Controller
 {
@@ -18,6 +20,19 @@ class StudentDashboardController extends Controller
         $recordings = LectureRecording::latest()->take(3)->get();
         $events = Event::orderBy('event_date')->take(4)->get();
 
-        return view('student.dashboard', compact('projects', 'courses', 'members', 'recordings', 'events'));
+        // ✅ Get upcoming assignments
+        $assignments = Assignment::where('due_date', '>=', now())
+                            ->orderBy('due_date')
+                            ->take(5)
+                            ->get();
+
+        return view('student.dashboard', compact(
+            'projects',
+            'courses',
+            'members',
+            'recordings',
+            'events',
+            'assignments' // ✅ Pass to view
+        ));
     }
 }

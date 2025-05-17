@@ -72,14 +72,33 @@
         </div>
 
         <!-- Right: Notifications -->
-        <div class="col-md-4 animate_animated animate_fadeInRight">
-            <h4>Notifications</h4>
+        <div class="col-md-4 animate_animated animate_fadeInUp">
+            <h4>Pending Assignments For You</h4>
             <div class="card shadow-sm hover-effect">
                 <div class="card-body">
                     <ul class="list-unstyled">
-                        <li><i class="fas fa-bell me-2 text-warning"></i> Assignment due this week</li>
-                        <li><i class="fas fa-book me-2 text-success"></i> New course added</li>
-                        <li><i class="fas fa-star me-2 text-primary"></i> Your profile is 90% complete</li>
+                        @forelse($assignments as $assignment)
+                            @php
+                                $remaining = now()->diffInMinutes($assignment->due_date, false);
+                                $hours = floor($remaining / 60);
+                                $minutes = $remaining % 60;
+                                $remainingText = $remaining > 0
+                                    ? "{$hours}h {$minutes}m remaining"
+                                    : 'Past due';
+                                $textClass = $remaining > 0 ? 'text-muted' : 'text-danger';
+                            @endphp
+
+                            @if(!$assignment->is_submitted)
+                                <li class="mb-3">
+                                    <i class="fas fa-bell me-2 text-warning"></i>
+                                    <strong>{{ $assignment->title }}</strong><br>
+                                    <small class="text-primary">Course: {{ $assignment->$courses->name ?? 'N/A' }}</small><br>
+                                    <small class="{{ $textClass }}">{{ $remainingText }}</small>
+                                </li>
+                            @endif
+                        @empty
+                            <li><i class="fas fa-check-circle me-2 text-success"></i> No pending assignments</li>
+                        @endforelse
                     </ul>
                 </div>
             </div>
