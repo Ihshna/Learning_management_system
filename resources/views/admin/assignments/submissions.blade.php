@@ -23,7 +23,7 @@
                     <td>{{ $submission->assignment->title }}</td>
                     <td>{{ $submission->student->name ?? 'N/A' }}</td>
                     <td>
-                        <a href="{{ asset('storage/' . $submission->file_path) }}" target="_blank">View File</a>
+                        <a href="{{ asset($submission->file_path) }}" target="_blank">View File</a>
                     </td>
                     <td>{{ $submission->created_at->format('d-m-Y H:i') }}</td>
                 </tr>

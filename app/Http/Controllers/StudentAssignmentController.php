@@ -40,27 +40,30 @@ class StudentAssignmentController extends Controller
     public function storeSubmission(Request $request, $id)
     {
         $request->validate([
-            'file' => 'required|mimes:pdf,doc,docx|max:2048',
-            'note' => 'nullable|string',
+        'file' => 'required|mimes:pdf,doc,docx|max:2048',
+        'note' => 'nullable|string',
+    ]);
+
+    $user = auth()->user();
+    $assignment = Assignment::findOrFail($id);
+
+    if ($request->hasFile('file')) {
+        // Define custom path inside public/assignments
+        $file = $request->file('file');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('assignments'), $filename);
+
+        AssignmentSubmission::create([
+            'assignment_id' => $assignment->id,
+            'student_id' => auth()->id(),
+            'file_path' => 'assignments/' . $filename, // Save relative path
+            'note' => $request->note,
         ]);
 
-        $user = auth()->user();
-        $assignment = Assignment::findOrFail($id);
+        return redirect()->route('student.assignments')->with('success', 'Assignment submitted successfully!');
+    }
 
-        if ($request->hasFile('file')) {
-            $filePath = $request->file('file')->store('submissions', 'public');
-
-            AssignmentSubmission::create([
-                'assignment_id' => $assignment->id,
-                'student_id' => auth()->id(),
-                'file_path' => $filePath,
-                'note' => $request->note,
-            ]);
-
-            return redirect()->route('student.assignments')->with('success', 'Assignment submitted successfully!');
-        }
-
-        return redirect()->back()->with('error', 'Failed to upload assignment.');
+    return redirect()->back()->with('error', 'Failed to upload assignment.');
     }
 
     public function submittedAssignments()
