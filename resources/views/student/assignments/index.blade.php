@@ -32,12 +32,13 @@
                             Due Date: {{ $dueDate->format('d M Y h:i A') }}
                         </p>
 
-                        {{-- Remaining time display --}}
-                        <p class="small fw-bold
-                            @if($totalRemainingMinutes > 0) text-success
-                            @elseif($totalRemainingMinutes === 0) text-warning
-                            @else text-danger
-                            @endif">
+                        {{-- Remaining time inside a colored box --}}
+                        <div class="alert
+                            @if($totalRemainingMinutes > 0) alert-success
+                            @elseif($totalRemainingMinutes === 0) alert-warning
+                            @else alert-danger
+                            @endif
+                            py-2 px-3 small fw-bold text-center" style="margin-bottom: 1rem;">
                             @if($totalRemainingMinutes > 0)
                                 @if($remainingDays > 0)
                                     {{ $remainingDays }} day{{ $remainingDays > 1 ? 's' : '' }}
@@ -85,7 +86,7 @@
                                     {{ $absMinutes }} minute{{ $absMinutes > 1 ? 's' : '' }}
                                 @endif
                             @endif
-                        </p>
+                        </div>
 
                         <div class="mt-auto">
                             @if($assignment->is_submitted)
