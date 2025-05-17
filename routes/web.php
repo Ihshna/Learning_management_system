@@ -114,7 +114,6 @@ Route::get('/student/dashboard', [StudentDashboardController::class, 'index'])->
 Route::get('/student/my-courses', [StudentCourseController::class, 'index'])->name('student.mycourses');
 Route::get('/student/course/{id}', [StudentCourseController::class, 'show'])->name('student.course.show');
 Route::post('/student/course/leave/{course}', [StudentCourseController::class, 'leave'])->name('student.course.leave');
-
 Route::get('/student/available-courses', [StudentAvailableCourseController::class, 'index'])->name('student.availablecourses');
 Route::post('/student/available-courses/enroll/{course}', [StudentAvailableCourseController::class, 'enroll'])->name('student.availablecourses.enroll');
 
