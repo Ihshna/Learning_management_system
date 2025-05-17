@@ -20,10 +20,42 @@
                 $remainingDays = intdiv($totalRemainingMinutes, 60 * 24);
                 $remainingHours = intdiv($totalRemainingMinutes % (60 * 24), 60);
                 $remainingMinutes = $totalRemainingMinutes % 60;
+
+                // Decide badge color class
+                if ($totalRemainingMinutes > 0) {
+                    $badgeClass = 'bg-success';
+                } elseif ($totalRemainingMinutes === 0) {
+                    $badgeClass = 'bg-warning text-dark';
+                } else {
+                    $badgeClass = 'bg-danger';
+                }
             @endphp
 
             <div class="col-md-6 mb-4">
-                <div class="card shadow-sm">
+                <div class="card shadow-sm position-relative">
+
+                    {{-- Remaining time badge top-right --}}
+                    <div style="position: absolute; top: 10px; right: 10px; z-index: 10;"
+                         class="badge {{ $badgeClass }} p-2 text-wrap" 
+                         title="Assignment due time remaining"
+                         >
+                        @if($totalRemainingMinutes > 0)
+                            @if($remainingDays > 0)
+                                {{ $remainingDays }}d
+                            @endif
+                            @if($remainingHours > 0)
+                                {{ $remainingHours }}h
+                            @endif
+                            @if($remainingMinutes > 0)
+                                {{ $remainingMinutes }}m
+                            @endif
+                        @elseif($totalRemainingMinutes === 0)
+                            Due now
+                        @else
+                            Past due
+                        @endif
+                    </div>
+
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">{{ $assignment->title }}</h5>
                         <p class="card-text">{{ Str::limit($assignment->description, 100) }}</p>
@@ -31,62 +63,6 @@
                         <p class="text-muted small mb-1">
                             Due Date: {{ $dueDate->format('d M Y h:i A') }}
                         </p>
-
-                        {{-- Remaining time inside a colored box --}}
-                        <div class="alert
-                            @if($totalRemainingMinutes > 0) alert-success
-                            @elseif($totalRemainingMinutes === 0) alert-warning
-                            @else alert-danger
-                            @endif
-                            py-2 px-3 small fw-bold text-center" style="margin-bottom: 1rem;">
-                            @if($totalRemainingMinutes > 0)
-                                @if($remainingDays > 0)
-                                    {{ $remainingDays }} day{{ $remainingDays > 1 ? 's' : '' }}
-                                    @if($remainingHours > 0 || $remainingMinutes > 0)
-                                        ,
-                                    @endif
-                                @endif
-
-                                @if($remainingHours > 0)
-                                    {{ $remainingHours }} hour{{ $remainingHours > 1 ? 's' : '' }}
-                                    @if($remainingMinutes > 0)
-                                        and
-                                    @endif
-                                @endif
-
-                                @if($remainingMinutes > 0)
-                                    {{ $remainingMinutes }} minute{{ $remainingMinutes > 1 ? 's' : '' }}
-                                @endif
-                                remaining
-                            @elseif($totalRemainingMinutes === 0)
-                                Due now!
-                            @else
-                                Past due by
-                                @php
-                                    $absDays = abs($remainingDays);
-                                    $absHours = abs($remainingHours);
-                                    $absMinutes = abs($remainingMinutes);
-                                @endphp
-
-                                @if($absDays > 0)
-                                    {{ $absDays }} day{{ $absDays > 1 ? 's' : '' }}
-                                    @if($absHours > 0 || $absMinutes > 0)
-                                        ,
-                                    @endif
-                                @endif
-
-                                @if($absHours > 0)
-                                    {{ $absHours }} hour{{ $absHours > 1 ? 's' : '' }}
-                                    @if($absMinutes > 0)
-                                        and
-                                    @endif
-                                @endif
-
-                                @if($absMinutes > 0)
-                                    {{ $absMinutes }} minute{{ $absMinutes > 1 ? 's' : '' }}
-                                @endif
-                            @endif
-                        </div>
 
                         <div class="mt-auto">
                             @if($assignment->is_submitted)
