@@ -26,10 +26,11 @@
                             <a href="{{ route('student.course.show', $course->id) }}" class="btn btn-primary btn-sm w-100 mb-2">View Details</a>
 
                             <!-- Leave Course Button -->
-                            <form method="POST" action="{{ route('student.course.leave', $course->id) }}">
-                                @csrf
-                                <button type="submit" class="btn btn-danger btn-sm w-100">Leave Course</button>
-                            </form>
+<form method="POST" action="{{ route('student.course.leave', $course->id) }}" onsubmit="return confirm('Are you sure you want to leave this course?');">
+    @csrf
+    <button type="submit" class="btn btn-danger btn-sm w-100">Leave Course</button>
+</form>
+
                         </div>
                     </div>
                 </div>

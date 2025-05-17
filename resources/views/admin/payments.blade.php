@@ -12,9 +12,10 @@
                 <tr>
                     <th>Student Name</th>
                     <th>Course</th>
+                    <th>Uploaded At</th>
                     <th>Slip</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -22,20 +23,27 @@
                 <tr>
                     <td>{{ $payment->student->name }}</td>
                     <td>{{ $payment->course->title }}</td>
+                    <td>{{ $payment->created_at}}</td>
                     <td>
-                        <a href="{{ asset('storage/' . $payment->payment_slip) }}" target="_blank">View Slip</a>
+                        <a href="{{ asset($payment->payment_slip) }}" target="_blank">View Slip</a>
+
                     </td>
-                    <td>{{ ucfirst($payment->status) }}</td>
                     <td>
-                        <form method="POST" action="{{ route('admin.payment.approve', $payment->id) }}">
-                            @csrf
-                            <button type="submit" class="btn btn-success btn-sm">Approve</button>
-                        </form>
-                        <form method="POST" action="{{ route('admin.payment.reject', $payment->id) }}" class="mt-1">
-                            @csrf
-                            <button type="submit" class="btn btn-danger btn-sm">Reject</button>
-                        </form>
-                    </td>
+    @if($payment->status === 'pending')
+        <form method="POST" action="{{ route('admin.payment.approve', $payment->id) }}">
+            @csrf
+            <button type="submit" class="btn btn-success btn-sm">Approve</button>
+        </form>
+        <form method="POST" action="{{ route('admin.payment.reject', $payment->id) }}" class="mt-1">
+            @csrf
+            <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+        </form>
+    @else
+        <span class="badge bg-{{ $payment->status === 'approved' ? 'success' : 'danger' }}">
+            {{ ucfirst($payment->status) }}
+        </span>
+    @endif
+</td>
                 </tr>
                 @endforeach
             </tbody>

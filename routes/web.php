@@ -155,9 +155,3 @@ Route::get('/student/course/{id}/payment', [StudentController::class, 'paymentFo
 Route::post('/student/course/{id}/payment', [StudentController::class, 'submitPayment'])
     ->name('student.course.payment.submit');
 
- Route::get('/admin/payments', [AdminController::class, 'viewPayments'])->name('admin.payments');
-
- Route::get('/admin/course/requests', [AdminController::class, 'viewCourseRequests'])->name('admin.course.requests');
-
- Route::patch('/admin/course/requests/{id}/approve', [AdminController::class, 'approveCourseRequest'])->name('admin.course.requests.approve');
-Route::patch('/admin/course/requests/{id}/reject', [AdminController::class, 'rejectCourseRequest'])->name('admin.course.requests.reject');

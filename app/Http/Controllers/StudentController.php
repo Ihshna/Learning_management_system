@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Course;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Payment;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -44,9 +45,20 @@ public function submitPayment(Request $request, $id)
         'payment_slip' => $filePath, 
         'status' => 'pending',
     ]);
+    
+    DB::table('course_student')->updateOrInsert(
+    ['student_id' => auth()->id(),
+     'course_id' => $id],
+    [
+        'status' => 'pending', 
+        'created_at' => now(), 
+        'updated_at' => now()]
+);
 
-    return redirect()->route('student.course.payment.form', $id)
-                     ->with('success', 'Payment submitted successfully. Awaiting admin approval.');
+
+
+    return redirect()->route('student.availablecourses')->with('success', 'Payment slip submitted successfully. Please wait for admin approval.');
+                     
 }
 
 
