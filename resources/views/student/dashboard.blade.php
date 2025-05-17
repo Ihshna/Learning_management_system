@@ -92,7 +92,7 @@
                                 <li class="mb-3">
                                     <i class="fas fa-bell me-2 text-warning"></i>
                                     <strong>{{ $assignment->title }}</strong><br>
-                                    <small class="text-primary">Course: {{ $assignment->$courses->name ?? 'N/A' }}</small><br>
+                                    <small class="text-primary">Course: {{ $assignment->course->title ?? 'N/A' }}</small><br>
                                     <small class="{{ $textClass }}">{{ $remainingText }}</small>
                                 </li>
                             @endif

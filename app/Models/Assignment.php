@@ -17,11 +17,12 @@ class Assignment extends Model
         'file_path',
     ];
 
-    public function course(){
-        return $this->belongsTo(Course::class);
-    }
+    public function course()
+{
+    return $this->belongsTo(Course::class);
+}
 
-     // 🔥 Add this new relationship
+    
      public function submissions()
      {
          return $this->hasMany(AssignmentSubmission::class);

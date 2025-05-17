@@ -27,10 +27,10 @@
         </h2>
         <div id="coursesMenu" class="accordion-collapse collapse" data-bs-parent="#adminSidebar">
             <div class="accordion-body p-0">
-                <a href="{{ route('admin.course.requests') }}" class="d-block ps-4">Course Join Requests</a>
+                
                 <a href="{{ route('admin.courses.create') }}" class="d-block ps-4">Add Course</a>
                 <a href="{{ route('admin.courses.manage') }}" class="d-block ps-4">Manage Courses</a>
-                <a href="{{ route('admin.payments') }}" class="d-block ps-4">Payment Approvals</a> <!-- ✅ Added new link -->
+                <a href="{{ route('admin.payments') }}" class="d-block ps-4">Payment Approvals</a> 
 
            
             </div>
