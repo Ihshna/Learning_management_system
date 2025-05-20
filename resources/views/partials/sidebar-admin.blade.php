@@ -31,11 +31,13 @@
                 <a href="{{ route('admin.courses.create') }}" class="d-block ps-4">Add Course</a>
                 <a href="{{ route('admin.courses.manage') }}" class="d-block ps-4">Manage Courses</a>
                 <a href="{{ route('admin.payments') }}" class="d-block ps-4">Payment Approvals</a> 
-
+                 <a href="{{ route('admin.lecturenotes.create') }}" class="d-block ps-4">Upload Notes</a>
            
             </div>
         </div>
     </div>
+
+    
 
     <!-- Assignments -->
     <div class="accordion-item bg-transparent border-0">
