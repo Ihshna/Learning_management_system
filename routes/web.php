@@ -159,3 +159,6 @@ Route::post('/student/course/{id}/payment', [StudentController::class, 'submitPa
 Route::get('/admin/lecture-notes/create', [AdminLectureNoteController::class, 'create'])->name('admin.lecturenotes.create');
 Route::post('/admin/lecture-notes/store', [AdminLectureNoteController::class, 'store'])->name('admin.lecturenotes.store');
 
+//Lecture Notes- Student
+Route::get('/student/course/{id}/notes', [StudentCourseController::class, 'viewNotes'])->name('student.course.notes');
+Route::get('/student/lecture-note/{id}', [StudentCourseController::class, 'showNote'])->name('student.course.notes.view');

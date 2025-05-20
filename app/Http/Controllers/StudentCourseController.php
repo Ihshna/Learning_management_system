@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Course;
 use App\Models\CourseRequest;
+use App\Models\LectureNote;
+
 
 
 class StudentCourseController extends Controller
@@ -65,6 +67,21 @@ class StudentCourseController extends Controller
     ]);
 
     return back()->with('success', 'Join request sent. Awaiting admin approval.');
+}
+
+    
+    public function viewNotes($id)
+{
+    $course = Course::findOrFail($id);
+    $notes = LectureNote::where('course_id', $id)->get();
+
+    return view('student.notes.index', compact('course', 'notes'));
+}
+
+    public function showNote($id)
+{
+    $note = LectureNote::findOrFail($id);
+    return view('student.notes.view', compact('note'));
 }
 
 
