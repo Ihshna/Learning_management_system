@@ -7,32 +7,39 @@ use App\Models\Course;
 use App\Models\User;
 use App\Models\LectureRecording;
 use App\Models\Event;
-use App\Models\Assignment; // ✅ Add this
+use App\Models\Assignment;
 
 class StudentDashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $projects = 4; // static or from DB if needed
-        $courses = Course::where('status', 'approved')->count();
+        $projects = 4;
+        $coursesCount = Course::where('status', 'approved')->count();
         $members = User::where('role', 'student')->count();
 
-        $recordings = LectureRecording::latest()->take(3)->get();
+        $course_id = $request->input('course_id');
+        $courseList = Course::where('status', 'approved')->get();
+
+        $recordings = LectureRecording::when($course_id, function ($query, $course_id) {
+            return $query->where('course_id', $course_id);
+        })->latest()->take(3)->get();
+
         $events = Event::orderBy('event_date')->take(4)->get();
 
-        // ✅ Get upcoming assignments
         $assignments = Assignment::where('due_date', '>=', now())
-                            ->orderBy('due_date')
-                            ->take(5)
-                            ->get();
+            ->orderBy('due_date')
+            ->take(5)
+            ->get();
 
         return view('student.dashboard', compact(
             'projects',
-            'courses',
+            'coursesCount',
             'members',
             'recordings',
             'events',
-            'assignments' // ✅ Pass to view
+            'assignments',
+            'courseList',
+            'course_id'
         ));
     }
 }
