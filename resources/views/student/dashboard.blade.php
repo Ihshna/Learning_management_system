@@ -92,17 +92,20 @@
                 <div class="card-body">
                     <ul class="list-unstyled">
                         @forelse($assignments as $assignment)
-                            @php
-                                $remaining = now()->diffInMinutes($assignment->due_date, false);
-                                $hours = floor($remaining / 60);
-                                $minutes = $remaining % 60;
-                                $remainingText = $remaining > 0
-                                    ? "{$hours}h {$minutes}m remaining"
-                                    : 'Past due';
-                                $textClass = $remaining > 0 ? 'text-muted' : 'text-danger';
-                            @endphp
-
                             @if(!$assignment->is_submitted)
+                                @php
+                                    $now = now();
+                                    $due = \Carbon\Carbon::parse($assignment->due_date);
+                                    $remaining = $now->diff($due);
+                                    $isPastDue = $now->gt($due);
+
+                                    $remainingText = $isPastDue
+                                        ? 'Past due'
+                                        : "{$remaining->d}d {$remaining->h}h {$remaining->i}m remaining";
+
+                                    $textClass = $isPastDue ? 'text-danger' : 'text-muted';
+                                @endphp
+
                                 <li class="mb-3">
                                     <i class="fas fa-bell me-2 text-warning"></i>
                                     <strong>{{ $assignment->title }}</strong><br>

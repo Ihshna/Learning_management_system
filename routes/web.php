@@ -20,6 +20,7 @@ use App\Http\Controllers\StudentAvailableCourseController;
 use App\Http\Controllers\StudentAssignmentController;
 use App\Http\Controllers\AdminLectureRecordingController;
 use App\Http\Controllers\AdminCourseRequestController;
+use App\Http\Controllers\AdminLectureNoteController;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -154,3 +155,10 @@ Route::get('/student/course/{id}/payment', [StudentController::class, 'paymentFo
 Route::post('/student/course/{id}/payment', [StudentController::class, 'submitPayment'])
     ->name('student.course.payment.submit');
 
+//Lecture Notes- Admin
+Route::get('/admin/lecture-notes/create', [AdminLectureNoteController::class, 'create'])->name('admin.lecturenotes.create');
+Route::post('/admin/lecture-notes/store', [AdminLectureNoteController::class, 'store'])->name('admin.lecturenotes.store');
+
+//Lecture Notes- Student
+Route::get('/student/course/{id}/notes', [StudentCourseController::class, 'viewNotes'])->name('student.course.notes');
+Route::get('/student/lecture-note/{id}', [StudentCourseController::class, 'showNote'])->name('student.course.notes.view');

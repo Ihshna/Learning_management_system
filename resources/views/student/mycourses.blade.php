@@ -23,7 +23,7 @@
 
                         <div class="mt-auto">
                             <!-- View Details Button -->
-                            <a href="{{ route('student.course.show', $course->id) }}" class="btn btn-primary btn-sm w-100 mb-2">View Details</a>
+                            <a href="{{  route('student.course.notes', $course->id) }}" class="btn btn-primary btn-sm w-100 mb-2">View Notes</a>
 
                             <!-- Leave Course Button -->
 <form method="POST" action="{{ route('student.course.leave', $course->id) }}" onsubmit="return confirm('Are you sure you want to leave this course?');">

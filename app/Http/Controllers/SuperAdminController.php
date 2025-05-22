@@ -13,18 +13,27 @@ class SuperAdminController extends Controller
         return view('superadmin.dashboard');
     }
 
-    public function dashboard(){
-        if(auth()->check()&& auth()->user()->role=='superadmin'){
-            $courseCount = Course::count();
-            $studentCount = User::where('role', 'student')->count();
-            $adminCount = User::where('role', 'admin')->count();
-            $pendingCourses = Course::where('status', 'pending')->count();
+    public function dashboard()
+{
+    if(auth()->check() && auth()->user()->role == 'superadmin'){
+        $courseCount = Course::count();
+        $adminCount = User::where('role', 'admin')->count();
+        $pendingCourses = Course::where('status', 'pending')->count();
 
-            return view('superadmin.dashboard', compact('courseCount', 'studentCount', 'adminCount', 'pendingCourses'));
-        }
+        // Get all courses with student counts
+        $courses = Course::withCount(['students' => function ($query) {
+            $query->where('role', 'student');
+        }])->get();
 
-        return redirect()->route('login')->with('error', 'Unauthorized access');
+        // Optional: total students count if still needed
+        $studentCount = User::where('role', 'student')->count();
+
+        return view('superadmin.dashboard', compact('courseCount', 'adminCount', 'pendingCourses', 'courses', 'studentCount'));
     }
+
+    return redirect()->route('login')->with('error', 'Unauthorized access');
+}
+
 
     
     public function pendingStudents()

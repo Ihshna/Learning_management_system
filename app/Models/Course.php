@@ -14,4 +14,10 @@ class Course extends Model
     public function creator(){
         return $this->belongsTo(User::class,'created_by');
     }
+//course count to SuperAdmin dashboard
+    public function students()
+{
+    return $this->belongsToMany(User::class, 'course_student', 'course_id', 'student_id');
+}
+
 }
