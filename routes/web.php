@@ -162,3 +162,7 @@ Route::post('/admin/lecture-notes/store', [AdminLectureNoteController::class, 's
 //Lecture Notes- Student
 Route::get('/student/course/{id}/notes', [StudentCourseController::class, 'viewNotes'])->name('student.course.notes');
 Route::get('/student/lecture-note/{id}', [StudentCourseController::class, 'showNote'])->name('student.course.notes.view');
+
+
+//recording part in my corses - student dashboard
+Route::get('/student/courses/{id}/recordings', [StudentController::class, 'viewRecordings'])->name('student.course.recordings');

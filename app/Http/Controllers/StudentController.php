@@ -7,6 +7,7 @@ use App\Models\Course;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Payment;
 use Illuminate\Support\Facades\DB;
+use App\Models\Recording;
 
 class StudentController extends Controller
 {
@@ -54,12 +55,17 @@ public function submitPayment(Request $request, $id)
         'created_at' => now(), 
         'updated_at' => now()]
 );
-
-
-
     return redirect()->route('student.availablecourses')->with('success', 'Payment slip submitted successfully. Please wait for admin approval.');
                      
 }
+public function viewRecordings($id)
+{
+    $course = Course::findOrFail($id);
+    $recordings = Recording::where('course_id', $id)->get();
+
+    return view('student.recordings.index', compact('course', 'recordings'));
+}
+
 
 
 }

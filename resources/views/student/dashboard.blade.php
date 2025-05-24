@@ -39,6 +39,7 @@
     <!-- Lecture Recordings + Assignments -->
     <div class="row mb-4">
 
+        {{-- 
         <!-- Lecture Recordings (Left) -->
         <div class="col-md-8">
             <h4>Lecture Recordings</h4>
@@ -84,6 +85,7 @@
                 <div class="alert alert-info">No lecture recordings yet.</div>
             @endforelse
         </div>
+        --}}
 
         <!-- Assignments (Right) -->
         <div class="col-md-4">
