@@ -37,6 +37,22 @@
         </div>
     </div>
 
+    <!-- Live Classes -->
+<div class="accordion-item bg-transparent border-0">
+    <h2 class="accordion-header">
+        <button class="accordion-button collapsed bg-transparent text-white" type="button" data-bs-toggle="collapse" data-bs-target="#liveClassesMenu">
+            Live Classes
+        </button>
+    </h2>
+    <div id="liveClassesMenu" class="accordion-collapse collapse" data-bs-parent="#adminSidebar">
+        <div class="accordion-body p-0">
+            <a href="{{ route('admin.liveclasses.create') }}" class="d-block ps-4">Add Live Class</a>
+            <a href="{{ route('admin.liveclasses.index') }}" class="d-block ps-4">Manage Live Classes</a>
+        </div>
+    </div>
+</div>
+
+
     
 
     <!-- Assignments -->

@@ -123,6 +123,25 @@
             </div>
         </div>
     </div>
+<div class="row">
+    <div class="col-md-12">
+        <h4>Upcoming Live Classes</h4>
+        <div class="card shadow-sm">
+            <div class="card-body">
+                @forelse($liveClasses as $class)
+                    <div class="mb-3 border-bottom pb-2">
+                        <h6>{{ $class->title }}</h6>
+                        <small class="text-muted">Starts at: {{ \Carbon\Carbon::parse($class->start_time)->format('d M Y, h:i A') }}</small><br>
+                        <small class="text-muted">Course: {{ $class->course->title ?? 'N/A' }}</small><br>
+                        <a href="{{ $class->meeting_link }}" class="btn btn-sm btn-success mt-2" target="_blank">Join Now</a>
+                    </div>
+                @empty
+                    <p>No upcoming live classes.</p>
+                @endforelse
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- Upcoming Events -->
     <div class="row">

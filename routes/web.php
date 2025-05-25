@@ -23,7 +23,7 @@ use App\Http\Controllers\AdminCourseRequestController;
 use App\Http\Controllers\AdminLectureNoteController;
 
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\LiveClassController;
 
 //Route::get('/', function () {
     //return view('welcome');
@@ -166,3 +166,14 @@ Route::get('/student/lecture-note/{id}', [StudentCourseController::class, 'showN
 
 //recording part in my corses - student dashboard
 Route::get('/student/courses/{id}/recordings', [StudentController::class, 'viewRecordings'])->name('student.course.recordings');
+
+// live classes
+Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
+    Route::resource('liveclasses', LiveClassController::class);
+});
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/liveclasses/create', [LiveClassController::class, 'create'])->name('liveclasses.create');
+});
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('liveclasses', LiveClassController::class);
+});
