@@ -12,7 +12,8 @@ class AddAdminController extends Controller
     {
         return view('superadmin.admins.create');
     }
-
+    
+    //Insert values into database table
     public function store(Request $request)
     {
         // Validate input
@@ -33,45 +34,49 @@ class AddAdminController extends Controller
         return redirect()->back()->with('success', 'Admin added successfully!');
     }
 
+    //Select admin whose role is index
     public function index()
-{
-    $admins = User::where('role', 'admin')->get();
-    return view('superadmin.admins.manage', compact('admins'));
-}
+    {
+        $admins = User::where('role', 'admin')->get();
+        return view('superadmin.admins.manage', compact('admins'));
+    }
+    
+    //Edit admin details
+    public function edit($id)
+    {
+        $admin = User::findOrFail($id);
+        return view('superadmin.admins.edit', compact('admin'));
+    }
+    
+    //Update details after editing
+    public function update(Request $request, $id)
+    {
+        $admin = User::findOrFail($id);
 
-public function edit($id)
-{
-    $admin = User::findOrFail($id);
-    return view('superadmin.admins.edit', compact('admin'));
-}
+        $request->validate([
+          'name' => 'required|string|max:255',
+          'email' => 'required|email|unique:users,email,' . $admin->id,
+          'password' => 'nullable|min:6|confirmed',
+        ]);
 
-public function update(Request $request, $id)
-{
-    $admin = User::findOrFail($id);
+         $admin->name = $request->name;
+         $admin->email = $request->email;
 
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:users,email,' . $admin->id,
-        'password' => 'nullable|min:6|confirmed',
-    ]);
+        if ($request->filled('password')) {
+            $admin->password = Hash::make($request->password);
+        }
 
-    $admin->name = $request->name;
-    $admin->email = $request->email;
+         $admin->save();
 
-    if ($request->filled('password')) {
-        $admin->password = Hash::make($request->password);
+         return redirect()->route('superadmin.admins.manage')->with('success', 'Admin updated successfully!');
     }
 
-    $admin->save();
+    //Delete admin details
+    public function destroy($id)
+    {
+        $admin = User::findOrFail($id);
+        $admin->delete();
 
-    return redirect()->route('superadmin.admins.manage')->with('success', 'Admin updated successfully!');
-}
-
-public function destroy($id)
-{
-    $admin = User::findOrFail($id);
-    $admin->delete();
-
-    return redirect()->route('superadmin.admins.manage')->with('success', 'Admin deleted successfully!');
-}
+        return redirect()->route('superadmin.admins.manage')->with('success', 'Admin deleted successfully!');
+    }
 }

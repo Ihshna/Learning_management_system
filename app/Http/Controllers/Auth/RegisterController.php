@@ -10,11 +10,13 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
+    //Return register page
     public function showRegister()
     {
         return view('auth.register');
     }
 
+    //Validate inputs and insert values into users table
     public function register(Request $request)
     {
         $request->validate([
