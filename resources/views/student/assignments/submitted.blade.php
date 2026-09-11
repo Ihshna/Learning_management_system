@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid py-4">
 
-    <h3 class="mb-4">📚 My Submitted Assignments</h3>
+    <h3 class="mb-4"> My Submitted Assignments</h3>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>

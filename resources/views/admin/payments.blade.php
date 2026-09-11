@@ -12,7 +12,6 @@
                 <tr>
                     <th>Student Name</th>
                     <th>Course</th>
-                    <th>Uploaded At</th>
                     <th>Slip</th>
                     <th>Status</th>
                     
@@ -23,7 +22,6 @@
                 <tr>
                     <td>{{ $payment->student->name }}</td>
                     <td>{{ $payment->course->title }}</td>
-                    <td>{{ $payment->created_at}}</td>
                     <td>
                         <a href="{{ asset($payment->payment_slip) }}" target="_blank">View Slip</a>
 

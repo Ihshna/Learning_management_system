@@ -9,7 +9,6 @@
             <tr>
                 <th>Course Name</th>
                 <th>Description</th>
-                <th>Requested By</th>
             </tr>
         </thead>
         <tbody>
@@ -17,7 +16,6 @@
             <tr>
                 <td>{{ $course->title }}</td>
                 <td>{{ $course->description }}</td>
-                <td>{{ $course->created_by }}</td>
             </tr>
             @empty
             <tr><td colspan="3" class="text-center">No approved courses yet</td></tr>

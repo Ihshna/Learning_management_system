@@ -37,7 +37,7 @@
         </div>
     </div>
 
-    <!-- Live Classes -->
+    <!-- Live Classes
 <div class="accordion-item bg-transparent border-0">
     <h2 class="accordion-header">
         <button class="accordion-button collapsed bg-transparent text-white" type="button" data-bs-toggle="collapse" data-bs-target="#liveClassesMenu">
@@ -50,7 +50,7 @@
             <a href="{{ route('admin.liveclasses.index') }}" class="d-block ps-4">Manage Live Classes</a>
         </div>
     </div>
-</div>
+</div>-->
 
 
     

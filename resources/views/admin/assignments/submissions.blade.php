@@ -14,7 +14,6 @@
                 <th>Assignment</th>
                 <th>Student Name</th>
                 <th>Submitted File</th>
-                <th>Submitted At</th>
             </tr>
         </thead>
         <tbody>
@@ -25,7 +24,6 @@
                     <td>
                         <a href="{{ asset($submission->file_path) }}" target="_blank">View File</a>
                     </td>
-                    <td>{{ $submission->created_at->format('d-m-Y H:i') }}</td>
                 </tr>
             @empty
                 <tr><td colspan="4">No submissions found.</td></tr>

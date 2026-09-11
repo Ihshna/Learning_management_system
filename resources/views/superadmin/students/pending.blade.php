@@ -13,7 +13,6 @@
             <tr>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Registered At</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -22,7 +21,6 @@
                 <tr>
                     <td>{{ $student->name }}</td>
                     <td>{{ $student->email }}</td>
-                    <td>{{ $student->created_at->format('d M Y') }}</td>
                     <td>
                         <form method="POST" action="{{ route('superadmin.students.approve', $student->id) }}" class="d-inline">
                             @csrf
